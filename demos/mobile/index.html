@@ -1,0 +1,75 @@
+<!DOCTYPE unspecified PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+		<script type="text/javascript" src="../../src/jquery.mobile.sliderbutton.js"></script>
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+		<link rel="stylesheet" href="../../src/jquery.mobile.sliderbutton.css" />
+		<style type="text/css">
+			.container {
+				margin-left: 1em;
+				margin-top: 1em;
+				width: 25%;
+			}
+			.container.log {
+				float: right;
+				margin-right: 40%;
+			}
+			#log {
+				height: 20em;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container log">
+			<textarea id="log" readonly="readonly"></textarea>
+		</div>
+		<div class="container">
+			Plain:
+			<div id="plain"></div>
+		</div>
+		<div class="container">
+			Changed text:
+			<div id="changedText"></div>
+		</div>
+		<div class="container">
+			Left:
+			<div id="left"></div>
+		</div>
+		<div class="container">
+			Disabled fade out:
+			<div id="opacity"></div>
+		</div>
+		<div class="container">
+			High tolerance:
+			<div id="tolerance"></div>
+		</div>
+		<div class="container">
+			Prevent sliding:
+			<div id="preventSlide"></div>
+		</div>
+		<div class="container">
+			Disabled:
+			<div id="disabled"></div>
+		</div>
+		<div class="container">
+			Mini:
+			<div id="mini"></div>
+		</div>
+	</body>
+	<script type="text/javascript">
+	function logActivated() {
+		var log = $('#log');
+		log.val(log.val()+$(this).attr("id")+"\n");
+	};
+	$('#plain').sliderbutton({activate: logActivated});
+	$('#changedText').sliderbutton({text: "touch me", activate: logActivated});
+	$('#left').sliderbutton({direction: "left", activate: logActivated});
+	$('#opacity').sliderbutton({opacity: function() {return 1.0}, activate: logActivated});
+	$('#tolerance').sliderbutton({tolerance: 50, activate: logActivated});
+	$('#preventSlide').sliderbutton({slide: function() {return false;}, activate: logActivated});
+	$('#disabled').sliderbutton({disabled: true, activate: logActivated});
+	$('#mini').sliderbutton({mini: true, activate: logActivated});
+	</script>
+</html>
