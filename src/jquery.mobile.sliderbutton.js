@@ -41,29 +41,32 @@
 			});
 			var handle = self.element.find('.ui-slider-handle');
 			handle.attr("title","");
+			
 			$.extend( self, {
 				slider: slider,
 				handle: handle,
 				text: text,
-				dragging: false,
-				activated: false,
-				resetting: false
+				dragging: false, // Used to determine whether we have to pay attention to global vmouseup events
+				activated: false, // Prevents multiple activations for the same slide
+				resetting: false // Prevents infinite recursion when resetting
 			});
 
 			slider.bind("change", function(event) {
 				self.handle.attr("title","");
 				var value = slider.val();
-				if ( (self.options.disabled || self.element.attr('disabled')) && (!self.resetting) ) {
-					self.disable();
+				
+				if ( (self.options.direction === "right" && value === 0) || (self.options.direction === "left" && value === 100) ) {
+					// Resetting is finished
+					self.resetting = false;
+				}
+				if ( self.options.disabled || self.element.attr('disabled') ) {
+//					self.disable();
 					self._resetSlider();
 					return false;
 				}
-				if ( (self.options.direction === "right" && value === 0) || (self.options.direction === "left" && value === 100) ) {
-					self.resetting = false;
-				}
 
 				var allowed = self._trigger("slide", event, {value: value});
-				if (allowed !== false && self.options.disabled !== true && !self.element.attr('disabled')) {
+				if (allowed !== false) {
 					self.text.css("opacity",self.options.opacity((self.options.direction === "left"?(100-value):value)));
 					if ( (self.activated === false) && ((self.options.direction === "right" && value >= (100-self.options.tolerance))
 							|| (self.options.direction === "left" && value <= (0+self.options.tolerance))) ) {
@@ -85,7 +88,7 @@
 				if (self.dragging) {
 					var allowed = self._trigger("stop", event, self.element);
 					if (allowed !== false) {
-						self.reset("fast");
+						self._reset("fast");
 					}
 					self.dragging = false;
 				}
@@ -96,6 +99,17 @@
 		
 		_resetSlider: function() {
 			var self = this;
+			
+			// Prevent that the handle is moved
+			if (self.options.direction === "right") {
+				self.handle.css("left", "0%");
+			}
+			else if (self.options.direction === "left") {
+				self.handle.css("left", "100%");
+			}
+			if (self.resetting) {
+				return; // Prevent infinite recursion
+			}
 			self.resetting = true;
 			self.activated = false;
 			if (self.options.direction === "right") {
@@ -107,7 +121,7 @@
 			self.slider.slider("refresh");
 		},
 		
-		reset: function(animationDuration) {
+		_reset: function(animationDuration) {
 			var self = this;
 			if (animationDuration === undefined || animationDuration === null) {
 				if (self.options.direction === "right") {
@@ -159,6 +173,7 @@
 				else if (value === "left") {
 					self.element.addClass("ui-sliderbutton-left");
 				}
+				self._resetSlider();
 				break;
 			default:
 				break;
