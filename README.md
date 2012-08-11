@@ -1,84 +1,111 @@
-jQuery UI/Mobile Sliderbutton
-=============================
+jQuery UI/Mobile Sliderbutton 1.0
+=================================
 
 The sliderbutton plugin provides a button which is triggered by sliding a handle to the side. This
 is a simple technique to avoid accidentally pressing a button.
 
 The plugin is based on the jQuery UI/Mobile slider widget. Since those widget differ in their
 implementation, the plugin comes in two version: one for jQuery UI and one for jQuery Mobile.
+The plugin tries to hide the differences between the version, which means that the API documented
+below applies to both version (except for the `mini` option) but the generated markup and CSS
+differs.
 
-Initialization
---------------
-The sliderbutton is created from a div element.
+Initialization & Usage
+----------------------
+The sliderbutton is created from a div element. When the sliderbutton is activated, the `activate`
+event is triggered. So to execute the desired action, bind a function to the `activate` event. 
+
+#### Example: ####
+```javascript
+// Initialize the sliderbutton
+$('#SliderDiv').sliderbutton({
+	text: "slide to submit", // Set slider lane text
+	activate: function() { alert('Submitted!'); } // Bind to the activate event during initialization
+});
+
+// Bind to the activate event after initialization
+$('#SliderDiv').bind('sliderbuttonactivate', function() { alert('Activate!'); });
+
+// Turn sliderbutton around
+$('#SliderDiv').sliderbutton('option', 'direction', 'right');
+```
 
 Options
 -------
-* disabled {Boolean}: Disables (`true`) or enables (`false`) the sliderbutton. Default: `false`
-* text {String}: The text appearing on the slider lane. Default: `"slide to unlock"`
-* tolerance {Numeric}: Defines the distance from the end of the slider lane where the button is triggered
+* __disabled__ _{Boolean}_: Disables (`true`) or enables (`false`) the sliderbutton. Default: `false`
+* __text__ _{String}_: The text appearing on the slider lane. Default: `"slide to unlock"`
+* __tolerance__ _{Numeric}_: Defines the distance from the end of the slider lane where the button is triggered
 	(activated). Must be in the range [0,100] where 0 means no tolerance (i.e. the slider needs to be
 	moved entirely to the end before the button is triggered) and 100 means maximum tolerance (i.e. the
 	slider just needs to be moved a slight bit for the button to trigger). Default: `1` for the UI
 	version and `5` for the mobile version.
-* direction {"right"|"left"}: Defines the direction in which the slider needs to be moved.
+* __direction__ _{"right"|"left"}_: Defines the direction in which the slider needs to be moved.
 	Default: `"right"`
-* opacity {Function}: Can be used to customize how the opacity of the text is changed. The function
+* __opacity__ _{Function}_: Can be used to customize how the opacity of the text is changed. The function
 	is handed one parameter, the current value in the range [0,100] where 0 means the slider is at
-	the start (idle position) and 100 means the slider it at the end. The function then has to return
-	a value for the opacity of the text. The default is `function(value) { return 1.0-(value/(100.0/2.0)); }`
-	which means a linear fade out where the text gets invisible in the middle of the lane.
-* mini {Boolean}: Mobile version only. Creates a mini version of the sliderbutton. Default: `false`
+	the start (idle position) and 100 means the slider it at the end (activated). The provided function
+	then has to return a value for the opacity of the text. The default is
+	`function(value) { return 1.0-(value/(100.0/2.0)); }` which means a linear fade out where the
+	text gets invisible in the middle of the lane.
+* __mini__ _{Boolean}_: **Mobile version only.** Creates a mini version of the sliderbutton. Default: `false`
 
 Events
 ------
-* slide {sliderbuttonslide}: Triggered when the slider handle is moving. The callback is provided
+* __create__ _{sliderbuttoncreate}_: Triggered after the sliderbutton has been created.
+* __slide__ _{sliderbuttonslide}_: Triggered when the slider handle is moving. The callback is provided
 	the arguments `event` and `ui` where `ui.value` is the current value (position) of the handle
 	in the range [0,100]. 0 means the slider is at the start (idle position) and 100 means the
-	slider is at the end. 
-* activate {sliderbuttonactivate}: Triggered when the slider handle reaches the "end" (taking the
+	slider is at the end (activated). 
+* __activate__ _{sliderbuttonactivate}_: Triggered when the slider handle reaches the "end" (taking the
 	tolerance into account).
-* start {sliderbuttonstart}: Triggered when the slider handle starts to move.
-* stop {sliderbuttonstop}: Triggered when the slider handle is released and starts to slide back
+* __start__ _{sliderbuttonstart}_: Triggered when the slider handle starts to move.
+* __stop__ _{sliderbuttonstop}_: Triggered when the slider handle is released and starts to slide back
 	into its idle position.
 
 Methods
 -------
-* destroy: Removes the sliderbutton functionality completely. This will return the element back
+* __destroy__: Removes the sliderbutton functionality completely. This will return the element back
 	to its pre-init state.
-	Synopsis: `.sliderbutton("destroy")`
-* disable: Disables the sliderbutton.
-	Synopsis: `.sliderbutton("disable")`
-* enable: Enalbes the sliderbutton.
-	Synopsis: `.sliderbutton("enable")`
-* option: Get or set any sliderbutton option. If no value is specified, will act as a getter.
-	Synopsis: `.sliderbutton("option", optionName, [value])`
-* option: Set multiple sliderbutton options at once by providing an options object.
-	Synopsis: `.sliderbutton("option", options)`
-* widget: Returns the .ui-sliderbutton element.
-	Synopsis: `.sliderbutton("widget")`
-
-Example usage
--------------
-```javascript
-$('#SliderDiv').sliderbutton({text: "slide to submit", activate: function() {alert("submitted!")}});
-```
+	- Synopsis: `.sliderbutton("destroy")`
+* __disable__: Disables the sliderbutton.
+	- Synopsis: `.sliderbutton("disable")`
+* __enable__: Enalbes the sliderbutton.
+	- Synopsis: `.sliderbutton("enable")`
+* __option__: Get or set any sliderbutton option. If no value is specified, will act as a getter.
+	- Synopsis: `.sliderbutton("option", optionName, [value])`
+	- Parameters:
+		* __optionName__ _{String}_: The name of the option to be set/returned.
+		* [optional] __value__ _{?}_: The new value for the option. The type depends on the option 
+			to be set.
+	- Returns _{?}_: The current value of the option if the function is used as a getter
+		(i.e. if _value_ is omitted). The type depends on the option. Returns the jQuery object if the
+		function is used as a setter.
+* __option__: Set multiple sliderbutton options at once by providing an options object.
+	- Synopsis: `.sliderbutton("option", options)`
+* __widget__: Returns the .ui-sliderbutton element.
+	- Synopsis: `.sliderbutton("widget")`
+	- Returns _{Object}_: The `.ui-sliderbutton` element.
 
 Requirements
 ------------
-The plugin requires jQuery and either jQuery UI 1.8 (including the slider widget) or jQuery Mobile.
+The plugin requires
+* jQuery 1.3.2+
+* jQuery UI 1.8 (including the slider widget) or jQuery Mobile
 
-Compatiblity
+Compatibility
 ------------
 The UI version of the plugin has been successfully tested with jQuery 1.7.2 and jQuery UI 1.8.20 and
 it should be compatible with future versions as long as the implementation of the jQuery UI slider
 does not change.
 
-The mobile version has been successuflly tested with jQuery 1.7.2 and jQuery Mobile 1.1.0 and it
+The mobile version has been successfully tested with jQuery 1.7.2 and jQuery Mobile 1.1.0 and it
 should be compatible with future versions as long as the implementation of the jQuery mobile slider
 does not change.
 
 Licensing
 ---------
-Copyright (c) 2012 Jochen Ulrich <jochenulrich@t-online.de>
+Copyright (c) 2012 Jochen Ulrich
+http://github.com/j-ulrich/jquery-sliderbutton
+
 Licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
