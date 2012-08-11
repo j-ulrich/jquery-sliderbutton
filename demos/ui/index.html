@@ -58,12 +58,39 @@
 		var log = $('#log');
 		log.val(log.val()+$(this).attr("id")+"\n");
 	};
-	$('#plain').sliderbutton({activate: logActivated});
-	$('#changedText').sliderbutton({text: "touch me", activate: logActivated});
-	$('#left').sliderbutton({direction: "left", activate: logActivated});
-	$('#opacity').sliderbutton({opacity: function() {return 1.0}, activate: logActivated});
-	$('#tolerance').sliderbutton({tolerance: 50, activate: logActivated});
-	$('#preventSlide').sliderbutton({slide: function() {return false;}, activate: logActivated});
-	$('#disabled').sliderbutton({disabled: true, activate: logActivated});
+	
+	$('#plain').sliderbutton({
+		activate: logActivated
+	});
+	
+	$('#changedText').sliderbutton({
+		text: "touch me",
+		activate: logActivated
+	});
+	
+	$('#left').sliderbutton({
+		direction: "left",
+		activate: logActivated
+	});
+	
+	$('#opacity').sliderbutton({
+		opacity: function() {return 1.0},
+		activate: logActivated
+	});
+	
+	$('#tolerance').sliderbutton({
+		tolerance: 50,
+		activate: logActivated
+	});
+	
+	$('#preventSlide').sliderbutton({
+		slide: function() {return false;},
+		activate: logActivated
+	});
+	
+	$('#disabled').sliderbutton({
+		disabled: true,
+		activate: logActivated
+	});
 	</script>
 </html>
