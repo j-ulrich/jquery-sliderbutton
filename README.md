@@ -4,11 +4,11 @@ jQuery UI/Mobile Sliderbutton 1.0
 The sliderbutton plugin provides a button which is triggered by sliding a handle to the side. This
 is a simple technique to avoid accidentally pressing a button.
 
-The plugin is based on the jQuery UI/Mobile slider widget. Since those widget differ in their
-implementation, the plugin comes in two version: one for jQuery UI and one for jQuery Mobile.
-The plugin tries to hide the differences between the version, which means that the API documented
-below applies to both version (except for the `mini` option) but the generated markup and CSS
-differs.
+The plugin is based on the jQuery UI/Mobile slider widget. Since this widget differs in its
+implementation in jQuery UI and jQuery mobile, the plugin comes in two versions: one for jQuery UI
+and one for jQuery Mobile. The plugin tries to hide the differences between the versions, which means
+that the API documented below applies to both versions (exceptions are marked accordingly) but the
+generated markup and CSS differs.
 
 Initialization & Usage
 ----------------------
@@ -46,7 +46,7 @@ Options
 	the start (idle position) and 100 means the slider it at the end (activated). The provided function
 	then has to return a value for the opacity of the text. The default is
 	`function(value) { return 1.0-(value/(100.0/2.0)); }` which means a linear fade out where the
-	text gets invisible in the middle of the lane.
+	text becomes invisible in the middle of the lane.
 * __mini__ _{Boolean}_: **Mobile version only.** Creates a mini version of the sliderbutton. Default: `false`
 
 Events
@@ -64,7 +64,7 @@ Events
 
 Methods
 -------
-* __destroy__: Removes the sliderbutton functionality completely. This will return the element back
+* __destroy__: **UI version only.** Removes the sliderbutton functionality completely. This will return the element back
 	to its pre-init state.
 	- Synopsis: `.sliderbutton("destroy")`
 * __disable__: Disables the sliderbutton.
