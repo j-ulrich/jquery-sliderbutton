@@ -82,6 +82,8 @@
 			
 			handle.bind("vmousedown", function(event) {
 				self.dragging = true;
+				self.resetting = false;
+				self.activated = false;
 				self._trigger("start", event, self.element);
 			});
 			handle.add(document).bind("vmouseup", function(event) {
