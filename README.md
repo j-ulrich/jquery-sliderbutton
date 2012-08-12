@@ -30,6 +30,14 @@ $('#SliderDiv').bind('sliderbuttonactivate', function() { alert('Activate!'); })
 $('#SliderDiv').sliderbutton('option', 'direction', 'right');
 ```
 
+#### Demos: ####
+The [demos folder](https://github.com/j-ulrich/jquery-sliderbutton/tree/master/demos) contains a
+demonstration of most of the features of both versions of the sliderbutton plugin.
+
+A live demo can be found at JS Bin where you can also play around with the plugin:
+* UI: http://jsbin.com/eqasew/2 ([play around](http://jsbin.com/eqasew/2/edit))
+* Mobile: http://jsbin.com/igovef/6 ([play around](http://jsbin.com/igovef/6/edit))
+
 Options
 -------
 * __disabled__ _{Boolean}_: Disables (`true`) or enables (`false`) the sliderbutton. Default: `false`
