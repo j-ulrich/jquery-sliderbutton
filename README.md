@@ -35,8 +35,8 @@ The [demos folder](https://github.com/j-ulrich/jquery-sliderbutton/tree/master/d
 demonstration of most of the features of both versions of the sliderbutton plugin.
 
 A live demo can be found at JS Bin where you can also play around with the plugin:
-* UI: http://jsbin.com/eqasew/2 ([play around](http://jsbin.com/eqasew/2/edit))
-* Mobile: http://jsbin.com/igovef/6 ([play around](http://jsbin.com/igovef/6/edit))
+* UI: http://jsbin.com/eqasew/2/edit#live ([play around](http://jsbin.com/eqasew/2/edit))
+* Mobile: http://jsbin.com/igovef/6/edit#live ([play around](http://jsbin.com/igovef/6/edit))
 
 Options
 -------
