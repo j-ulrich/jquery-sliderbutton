@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="jquery-sliderbutton : jQuery UI/Mobile plugin providing a slider-based button (&quot;slide to unlock&quot;)" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>jquery-sliderbutton</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/j-ulrich/jquery-sliderbutton">View on GitHub</a>
+
+          <h1 id="project_title">jquery-sliderbutton</h1>
+          <h2 id="project_tagline">jQuery UI/Mobile plugin providing a slider-based button (&quot;slide to unlock&quot;)</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/j-ulrich/jquery-sliderbutton/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/j-ulrich/jquery-sliderbutton/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>jQuery UI/Mobile Sliderbutton 1.0</h1>
+
+<p>The sliderbutton plugin provides a button which is triggered by sliding a handle to the side. This
+is a simple technique to avoid accidentally pressing a button.</p>
+
+<p>The plugin is based on the jQuery UI/Mobile slider widget. Since this widget differs in its
+implementation in jQuery UI and jQuery mobile, the plugin comes in two versions: one for jQuery UI
+and one for jQuery Mobile. The plugin tries to hide the differences between the versions, which means
+that the API documented below applies to both versions (exceptions are marked accordingly) but the
+generated markup and CSS differs.</p>
+
+<h2>Initialization &amp; Usage</h2>
+
+<p>The sliderbutton is created from a div element. When the sliderbutton is activated, the <code>activate</code>
+event is triggered. So to execute the desired action, bind a function to the <code>activate</code> event. </p>
+
+<h4>Example:</h4>
+
+<div class="highlight"><pre><span class="c1">// Initialize the sliderbutton</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#SliderDiv'</span><span class="p">).</span><span class="nx">sliderbutton</span><span class="p">({</span>
+    <span class="nx">text</span><span class="o">:</span> <span class="s2">"slide to submit"</span><span class="p">,</span> <span class="c1">// Set slider lane text</span>
+    <span class="nx">activate</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">'Submitted!'</span><span class="p">);</span> <span class="p">}</span> <span class="c1">// Bind to the activate event during initialization</span>
+<span class="p">});</span>
+
+<span class="c1">// Bind to the activate event after initialization</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#SliderDiv'</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">'sliderbuttonactivate'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">'Activate!'</span><span class="p">);</span> <span class="p">});</span>
+
+<span class="c1">// Turn sliderbutton around</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#SliderDiv'</span><span class="p">).</span><span class="nx">sliderbutton</span><span class="p">(</span><span class="s1">'option'</span><span class="p">,</span> <span class="s1">'direction'</span><span class="p">,</span> <span class="s1">'right'</span><span class="p">);</span>
+</pre></div>
+
+<h4>Demos:</h4>
+
+<p>The <a href="https://github.com/j-ulrich/jquery-sliderbutton/tree/master/demos">demos folder</a> contains a
+demonstration of most of the features of both versions of the sliderbutton plugin.</p>
+
+<p>A live demo can be found at JS Bin where you can also play around with the plugin:</p>
+
+<ul>
+<li>UI: <a href="http://jsbin.com/eqasew/2/edit#live">http://jsbin.com/eqasew/2/edit#live</a> (<a href="http://jsbin.com/eqasew/2/edit">play around</a>)</li>
+<li>Mobile: <a href="http://jsbin.com/igovef/6/edit#live">http://jsbin.com/igovef/6/edit#live</a> (<a href="http://jsbin.com/igovef/6/edit">play around</a>)</li>
+</ul><h2>Options</h2>
+
+<ul>
+<li>
+<strong>disabled</strong> <em>{Boolean}</em>: Disables (<code>true</code>) or enables (<code>false</code>) the sliderbutton. Default: <code>false</code>
+</li>
+<li>
+<strong>text</strong> <em>{String}</em>: The text appearing on the slider lane. Default: <code>"slide to unlock"</code>
+</li>
+<li>
+<strong>tolerance</strong> <em>{Numeric}</em>: Defines the distance from the end of the slider lane where the button is triggered
+(activated). Must be in the range [0,100] where 0 means no tolerance (i.e. the slider needs to be
+moved entirely to the end before the button is triggered) and 100 means maximum tolerance (i.e. the
+slider just needs to be moved a slight bit for the button to trigger). Default: <code>1</code> for the UI
+version and <code>5</code> for the mobile version.</li>
+<li>
+<strong>direction</strong> <em>{"right"|"left"}</em>: Defines the direction in which the slider needs to be moved.
+Default: <code>"right"</code>
+</li>
+<li>
+<strong>opacity</strong> <em>{Function}</em>: Can be used to customize how the opacity of the text is changed. The function
+is handed one parameter, the current value in the range [0,100] where 0 means the slider is at
+the start (idle position) and 100 means the slider it at the end (activated). The provided function
+then has to return a value for the opacity of the text. The default is
+<code>function(value) { return 1.0-(value/(100.0/2.0)); }</code> which means a linear fade out where the
+text becomes invisible in the middle of the lane.</li>
+<li>
+<strong>mini</strong> <em>{Boolean}</em>: <strong>Mobile version only.</strong> Creates a mini version of the sliderbutton. Default: <code>false</code>
+</li>
+</ul><h2>Events</h2>
+
+<ul>
+<li>
+<strong>create</strong> <em>{sliderbuttoncreate}</em>: Triggered after the sliderbutton has been created.</li>
+<li>
+<strong>slide</strong> <em>{sliderbuttonslide}</em>: Triggered when the slider handle is moving. The callback is provided
+the arguments <code>event</code> and <code>ui</code> where <code>ui.value</code> is the current value (position) of the handle
+in the range [0,100]. 0 means the slider is at the start (idle position) and 100 means the
+slider is at the end (activated). </li>
+<li>
+<strong>activate</strong> <em>{sliderbuttonactivate}</em>: Triggered when the slider handle reaches the "end" (taking the
+tolerance into account).</li>
+<li>
+<strong>start</strong> <em>{sliderbuttonstart}</em>: Triggered when the slider handle starts to move.</li>
+<li>
+<strong>stop</strong> <em>{sliderbuttonstop}</em>: Triggered when the slider handle is released and starts to slide back
+into its idle position.</li>
+</ul><h2>Methods</h2>
+
+<ul>
+<li>
+<strong>destroy</strong>: <strong>UI version only.</strong> Removes the sliderbutton functionality completely. This will return the element back
+to its pre-init state.
+
+<ul>
+<li>Synopsis: <code>.sliderbutton("destroy")</code>
+</li>
+</ul>
+</li>
+<li>
+<strong>disable</strong>: Disables the sliderbutton.
+
+<ul>
+<li>Synopsis: <code>.sliderbutton("disable")</code>
+</li>
+</ul>
+</li>
+<li>
+<strong>enable</strong>: Enalbes the sliderbutton.
+
+<ul>
+<li>Synopsis: <code>.sliderbutton("enable")</code>
+</li>
+</ul>
+</li>
+<li>
+<strong>option</strong>: Get or set any sliderbutton option. If no value is specified, will act as a getter.
+
+<ul>
+<li>Synopsis: <code>.sliderbutton("option", optionName, [value])</code>
+</li>
+<li>Parameters:
+
+<ul>
+<li>
+<strong>optionName</strong> <em>{String}</em>: The name of the option to be set/returned.</li>
+<li>[optional] <strong>value</strong> <em>{?}</em>: The new value for the option. The type depends on the option 
+to be set.</li>
+</ul>
+</li>
+<li>Returns <em>{?}</em>: The current value of the option if the function is used as a getter
+(i.e. if <em>value</em> is omitted). The type depends on the option. Returns the jQuery object if the
+function is used as a setter.</li>
+</ul>
+</li>
+<li>
+<strong>option</strong>: Set multiple sliderbutton options at once by providing an options object.
+
+<ul>
+<li>Synopsis: <code>.sliderbutton("option", options)</code>
+</li>
+</ul>
+</li>
+<li>
+<strong>widget</strong>: Returns the .ui-sliderbutton element.
+
+<ul>
+<li>Synopsis: <code>.sliderbutton("widget")</code>
+</li>
+<li>Returns <em>{Object}</em>: The <code>.ui-sliderbutton</code> element.</li>
+</ul>
+</li>
+</ul><h2>Requirements</h2>
+
+<p>The plugin requires</p>
+
+<ul>
+<li>jQuery 1.3.2+</li>
+<li>jQuery UI 1.8 (including the slider widget) or jQuery Mobile</li>
+</ul><h2>Compatibility</h2>
+
+<p>The UI version of the plugin has been successfully tested with jQuery 1.7.2 and jQuery UI 1.8.20 and
+it should be compatible with future versions as long as the implementation of the jQuery UI slider
+does not change.</p>
+
+<p>The mobile version has been successfully tested with jQuery 1.7.2 and jQuery Mobile 1.1.0 and it
+should be compatible with future versions as long as the implementation of the jQuery mobile slider
+does not change.</p>
+
+<h2>Licensing</h2>
+
+<p>Copyright (c) 2012 Jochen Ulrich
+<a href="http://github.com/j-ulrich/jquery-sliderbutton">http://github.com/j-ulrich/jquery-sliderbutton</a></p>
+
+<p>Licensed under the <a href="http://opensource.org/licenses/MIT">MIT license</a>.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">jquery-sliderbutton maintained by <a href="https://github.com/j-ulrich">j-ulrich</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
