@@ -34,9 +34,13 @@ $('#SliderDiv').sliderbutton('option', 'direction', 'right');
 The [demos folder](https://github.com/j-ulrich/jquery-sliderbutton/tree/master/demos) contains a
 demonstration of most of the features of both versions of the sliderbutton plugin.
 
-A live demo can be found at JS Bin where you can also play around with the plugin:
-* UI: http://jsbin.com/eqasew/2/edit#live ([play around](http://jsbin.com/eqasew/2/edit))
-* Mobile: http://jsbin.com/igovef/6/edit#live ([play around](http://jsbin.com/igovef/6/edit))
+Live demos can be found at jsFiddle and JS Bin where you can also play around with the plugin:
+* UI:
+	- http://jsfiddle.net/Ignitor/SmZEr/embedded/result/ ([jsFiddle](http://jsfiddle.net/Ignitor/SmZEr/))
+	- http://jsbin.com/eqasew/5/edit#live ([JS Bin](http://jsbin.com/eqasew/2/edit))
+* Mobile:
+	- http://jsfiddle.net/Ignitor/VY5FC/embedded/result/ ([jsFiddle](http://jsfiddle.net/Ignitor/VY5FC/))
+	- http://jsbin.com/igovef/8/edit#live ([JS Bin](http://jsbin.com/igovef/6/edit))
 
 Options
 -------
