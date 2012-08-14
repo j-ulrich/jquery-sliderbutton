@@ -1,18 +1,47 @@
 <!doctype html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <title>jquery-sliderbutton by j-ulrich</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="stylesheets/styles.css" />
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css" />
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/themes/ui-lightness/jquery-ui.css" />
+    <link rel="stylesheet" href="jquery.ui.sliderbutton.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/jquery-ui.min.js"></script>
+    <script src="jquery.ui.sliderbutton.js"></script>
     <script src="javascripts/main.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
+    <style type="text/css">
+        #ui-example {
+            width: 70%;
+        }
+
+        #example-log {
+            width: 70%;
+            margin-top: 1em;
+            margin-bottom: 2em;
+        }
+        
+        #banner .github-links {
+        	left: 50%;
+        	position: fixed;
+        	margin-left: -325px;
+        }
+        #banner .github-links ul {
+        	margin: 0px;
+        }
+        #banner .github-links .button {
+        	margin-left: 0px;
+        	margin-right: 5px;
+        }
+        
+    </style>
   </head>
   <body>
 
@@ -23,8 +52,14 @@
 
       <div id="banner">
         <span id="logo"></span>
-
-        <a href="https://github.com/j-ulrich/jquery-sliderbutton" class="button fork"><strong>View On GitHub</strong></a>
+		
+		<div class="github-links">
+			<ul>
+				<li><a href="https://github.com/j-ulrich/jquery-sliderbutton/blob/master/README.md" class="button">Documentation</a></li>
+				<li><a href="https://github.com/j-ulrich/jquery-sliderbutton/issues" class="button">Bug Tracker</a></li>
+				<li><a href="https://github.com/j-ulrich/jquery-sliderbutton" class="button"><strong>View On GitHub</strong></a></li>
+			</ul>
+		</div>
         <div class="downloads">
           <span>Downloads:</span>
           <ul>
@@ -44,10 +79,14 @@
 <p>The sliderbutton plugin provides a button which is triggered by sliding a handle to the side. This
 is a simple technique to avoid accidentally pressing a button.</p>
 
+<h4>Demo:</h4>
+<div id="ui-example"></div>
+<input id="example-log" type="text" readonly="readonly"></input>
+
 <p>The plugin is based on the jQuery UI/Mobile slider widget. Since this widget differs in its
 implementation in jQuery UI and jQuery mobile, the plugin comes in two versions: one for jQuery UI
 and one for jQuery Mobile. The plugin tries to hide the differences between the versions, which means
-that the API documented below applies to both versions (exceptions are marked accordingly) but the
+that the <a href="https://github.com/j-ulrich/jquery-sliderbutton/blob/master/README.md">API</a> applies to both versions (exceptions are marked accordingly) but the
 generated markup and CSS differs.</p>
 
 <h2>Initialization &amp; Usage Example</h2>
@@ -70,15 +109,7 @@ event is triggered. So to execute the desired action, bind a function to the <co
 <span class="nx">$</span><span class="p">(</span><span class="s1">'#SliderDiv'</span><span class="p">).</span><span class="nx">sliderbutton</span><span class="p">(</span><span class="s1">'option'</span><span class="p">,</span> <span class="s1">'direction'</span><span class="p">,</span> <span class="s1">'right'</span><span class="p">);</span>
 </pre></div>
 
-<h2>Demos</h2>
-
-<h4>UI:</h4>
-
- 
-
-<h4>Mobile:</h4>
-
- 
+<h2>More Demos</h2>
 
 <p>The <a href="https://github.com/j-ulrich/jquery-sliderbutton/tree/master/demos">demos folder</a> in the download contains a demonstration of most of the features of both versions of the sliderbutton plugin.</p>
 
@@ -112,7 +143,7 @@ does not change.</p>
 
 <h2>Licensing</h2>
 
-<p>Copyright (c) 2012 Jochen Ulrich<br><a href="http://github.com/j-ulrich/jquery-sliderbutton">http://github.com/j-ulrich/jquery-sliderbutton</a></p>
+<p>Copyright (c) 2012 Jochen Ulrich<br/><a href="http://github.com/j-ulrich/jquery-sliderbutton">http://github.com/j-ulrich/jquery-sliderbutton</a></p>
 
 <p>Licensed under the <a href="http://opensource.org/licenses/MIT">MIT license</a>.</p>
       </section>
