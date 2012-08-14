@@ -37,10 +37,10 @@ demonstration of most of the features of both versions of the sliderbutton plugi
 Live demos can be found at jsFiddle and JS Bin where you can also play around with the plugin:
 * UI:
 	- http://jsfiddle.net/Ignitor/SmZEr/embedded/result/ ([jsFiddle](http://jsfiddle.net/Ignitor/SmZEr/))
-	- http://jsbin.com/eqasew/5/edit#live ([JS Bin](http://jsbin.com/eqasew/2/edit))
+	- http://jsbin.com/eqasew/latest/edit#live ([JS Bin](http://jsbin.com/eqasew/latest/edit))
 * Mobile:
 	- http://jsfiddle.net/Ignitor/VY5FC/embedded/result/ ([jsFiddle](http://jsfiddle.net/Ignitor/VY5FC/))
-	- http://jsbin.com/igovef/8/edit#live ([JS Bin](http://jsbin.com/igovef/6/edit))
+	- http://jsbin.com/igovef/latest/edit#live ([JS Bin](http://jsbin.com/igovef/latest/edit))
 
 Options
 -------
