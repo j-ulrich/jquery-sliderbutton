@@ -116,7 +116,7 @@ does not change.
 
 Licensing
 ---------
-Copyright (c) 2012 Jochen Ulrich
+Copyright &copy; 2012 Jochen Ulrich
 http://github.com/j-ulrich/jquery-sliderbutton
 
 Licensed under the [MIT license](http://opensource.org/licenses/MIT).
