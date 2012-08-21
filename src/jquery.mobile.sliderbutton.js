@@ -47,14 +47,24 @@
 				handle: handle,
 				text: text,
 				dragging: false, // Used to determine whether we have to pay attention to global vmouseup events
+				mousebutton: false,
 				activated: false, // Prevents multiple activations for the same slide
 				resetting: false // Prevents infinite recursion when resetting
 			});
 
+			// Disable key control
+			handle.add(self.element).unbind("keyup").unbind("keydown");
+			
 			slider.bind("change", function(event) {
 				self.handle.attr("title","");
-				var value = slider.val();
-				
+				var value = parseInt(slider.val());
+
+				if (self.mousebutton === true) {
+					// Sliderbutton plugin does not react to mousedown/mouseup triggered change events
+					self.mousebutton = false;
+					return true;
+				}
+
 				if ( (self.options.direction === "right" && value === 0) || (self.options.direction === "left" && value === 100) ) {
 					// Resetting is finished
 					self.resetting = false;
@@ -81,18 +91,23 @@
 			});
 			
 			handle.bind("vmousedown", function(event) {
-				self.dragging = true;
-				self.resetting = false;
-				self.activated = false;
-				self._trigger("start", event, self.element);
+				self.mousebutton = true;
+				if (!self.dragging) {
+					self.dragging = true;
+					self.resetting = false;
+					self.activated = false;
+					return self._trigger("start", event, self.element);
+				}
 			});
 			handle.add(document).bind("vmouseup", function(event) {
+				self.mousebutton = true;
 				if (self.dragging) {
 					var allowed = self._trigger("stop", event, self.element);
 					if (allowed !== false) {
 						self._reset("fast");
 					}
 					self.dragging = false;
+					return allowed;
 				}
 			});
 			
@@ -114,13 +129,14 @@
 			}
 			self.resetting = true;
 			self.activated = false;
+			self.mousebutton = false;
 			if (self.options.direction === "right") {
 				self.slider.val(0);
 			}
 			else if (self.options.direction === "left") {
 				self.slider.val(100);
 			}
-			self.slider.slider("refresh");
+//			self.slider.slider("refresh");
 		},
 		
 		_reset: function(animationDuration) {

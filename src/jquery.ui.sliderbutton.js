@@ -68,9 +68,10 @@
 					if (allowed !== false) {
 						self._reset("fast");
 					}
+					return allowed;
 				},
 				start: function(event, ui) {
-					self._trigger("start", event, ui);
+					return self._trigger("start", event, ui);
 				}
 			});
 		},
