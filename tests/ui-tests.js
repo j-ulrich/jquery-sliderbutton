@@ -199,29 +199,32 @@ $(document).ready(function() {
 		var expectedEvents = [ ];
 		var expectedEventsIndex = 0;
 		
+		function assertExpectedEvent(event, message) {
+			var msg = message || event+" triggered";
+			strictEqual(event, expectedEvents[expectedEventsIndex], msg);
+			if (event === expectedEvents[expectedEventsIndex]) {
+				expectedEventsIndex += 1;
+			}
+		}
+		
 		$('#qunit-fixture').on('sliderbuttoncreate', '.ui-sliderbutton', function() {
-			strictEqual('create', expectedEvents[expectedEventsIndex], "create triggered");
-			expectedEventsIndex += 1;
+			assertExpectedEvent('create');
 		});
 
 		$('#qunit-fixture').on('sliderbuttonstart', '.ui-sliderbutton', function() {
-			strictEqual('start', expectedEvents[expectedEventsIndex], "start triggered");
-			expectedEventsIndex += 1;
+			assertExpectedEvent('start');
 		});
 
-		$('#qunit-fixture').on('sliderbuttonslide', '.ui-sliderbutton', function() {
-			strictEqual('slide', expectedEvents[expectedEventsIndex], "slide triggered");
-			expectedEventsIndex += 1;
+		$('#qunit-fixture').on('sliderbuttonslide', '.ui-sliderbutton', function(event, ui) {
+			assertExpectedEvent("slide", "slide triggered (value: "+ui.value+")");
 		});
 
 		$('#qunit-fixture').on('sliderbuttonstop', '.ui-sliderbutton', function() {
-			strictEqual('stop', expectedEvents[expectedEventsIndex], "stop triggered");
-			expectedEventsIndex += 1;
+			assertExpectedEvent('stop');
 		});
 		
 		$('#qunit-fixture').on('sliderbuttonactivate', '.ui-sliderbutton', function() {
-			strictEqual('activate', expectedEvents[expectedEventsIndex], "activate triggered");
-			expectedEventsIndex += 1;
+			assertExpectedEvent('activate');
 		});
 
 
@@ -243,10 +246,18 @@ $(document).ready(function() {
 		handle.simulate("drop");
 		
 		// Trigger start, slide, activate and stop
-		expectedEvents.push('start', 'slide', 'activate', 'stop');
-		handle.simulate("drag", {dx: dx});
-		handle.simulate("drag", {dx: dx});
-		handle.simulate("drop");
+		expectedEvents.push('start', 'slide', 'slide', 'activate', 'stop');
+		
+		stop(); // We need to wait until the handle is slided back
+		setTimeout(function() {
+			handle.simulate("drag", {dx: dx});
+			handle.simulate("drag", {dx: dx});
+			handle.simulate("drop");
+			for (; expectedEventsIndex < expectedEvents.length; expectedEventsIndex += 1) {
+				ok(false, "Missing event: "+expectedEvents[expectedEventsIndex]);
+			}
+			start();
+		}, 300);
 		
 		expect(expectedEvents.length);
 	});

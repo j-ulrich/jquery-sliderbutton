@@ -7,8 +7,6 @@
 
 $(document).ready(function() {
 	
-	// TODO: Rewrite tests: Tests need to be called after sliderbutton is created (-> "create" event).
-	
 	test("basic markup expansion", function() {
 		var testElement = $('#sliderbuttontest');
 		testElement.sliderbutton();
@@ -251,16 +249,22 @@ $(document).ready(function() {
 		expectedEvents.push('stop');
 		handle.simulate("drop");
 		
-		// Trigger start, slide, activate and stop
-		expectedEvents.push('start', 'slide', 'activate', 'stop');
-		handle.simulate("drag", {dx: dx});
-		handle.simulate("drag", {dx: dx});
-		handle.simulate("drop");
 		
+		// Trigger start, slide, activate and stop
+		expectedEvents.push('start', 'slide', 'slide', 'activate', 'stop');
+
+		stop(); // We need to wait until the handle is slided back
+		setTimeout(function() {
+			handle.simulate("drag", {dx: dx});
+			handle.simulate("drag", {dx: dx});
+			handle.simulate("drop");
+			for (; expectedEventsIndex < expectedEvents.length; expectedEventsIndex += 1) {
+				ok(false, "Missing event: "+expectedEvents[expectedEventsIndex]);
+			}
+			start();
+		}, 300);
+
 		expect(expectedEvents.length);
-		for (; expectedEventsIndex < expectedEvents.length; expectedEventsIndex += 1) {
-			ok(false, "Missing event: "+expectedEvents[expectedEventsIndex]);
-		}
 	});
 
 	test("tolerance", function() {
