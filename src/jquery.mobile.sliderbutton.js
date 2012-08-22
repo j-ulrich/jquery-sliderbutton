@@ -1,5 +1,5 @@
 /*
- * jQuery Mobile Slider Button 1.0
+ * jQuery Mobile Slider Button 1.1
  * http://github.com/j-ulrich/jquery-sliderbutton
  *
  * Copyright (c) 2012 Jochen Ulrich <jochenulrich@t-online.de>
@@ -47,62 +47,46 @@
 				handle: handle,
 				text: text,
 				dragging: false, // Used to determine whether we have to pay attention to global vmouseup events
-				mousebutton: false,
-				activated: false, // Prevents multiple activations for the same slide
-				resetting: false // Prevents infinite recursion when resetting
+				activated: false // Prevents multiple activations for the same slide
 			});
 
 			// Disable key control
 			handle.add(self.element).unbind("keyup").unbind("keydown");
 			
-			slider.bind("change", function(event) {
-				self.handle.attr("title","");
-				var value = parseInt(slider.val());
+			handle.add(document).bind("vmousemove", function(event) {
+				if (self.dragging) {
+					self.handle.attr("title","");
+					var value = Math.round(parseInt(handle.css("left")) / parseInt(handle.parent().css("width")) * 100);
 
-				if (self.mousebutton === true) {
-					// Sliderbutton plugin does not react to mousedown/mouseup triggered change events
-					self.mousebutton = false;
-					return true;
-				}
-
-				if ( (self.options.direction === "right" && value === 0) || (self.options.direction === "left" && value === 100) ) {
-					// Resetting is finished
-					self.resetting = false;
-				}
-				if ( self.options.disabled || self.element.attr('disabled') ) {
-//					self.disable();
-					self._resetSlider();
-					return false;
-				}
-
-				var allowed = self._trigger("slide", event, {value: value});
-				if (allowed !== false) {
-					self.text.css("opacity",self.options.opacity((self.options.direction === "left"?(100-value):value)));
-					if ( (self.activated === false) && ((self.options.direction === "right" && value >= (100-self.options.tolerance))
-							|| (self.options.direction === "left" && value <= (0+self.options.tolerance))) ) {
-						self._trigger("activate", event, {value: value});
-						self.activated = true;
+					var allowed = self._trigger("slide", null, {value: value});
+					if (allowed !== false) {
+						self.text.css("opacity",self.options.opacity((self.options.direction === "left"?(100-value):value)));
+						if ( (self.activated === false) && ((self.options.direction === "right" && value >= (100-self.options.tolerance))
+								|| (self.options.direction === "left" && value <= (0+self.options.tolerance))) ) {
+							self._trigger("activate");
+							self.activated = true;
+						}
 					}
+					else {
+						self._resetSlider();
+					}
+					return allowed;
 				}
-				else {
-					self._resetSlider();
-				}
-				return allowed;
 			});
 			
 			handle.bind("vmousedown", function(event) {
-				self.mousebutton = true;
-				if (!self.dragging) {
-					self.dragging = true;
-					self.resetting = false;
-					self.activated = false;
-					return self._trigger("start", event, self.element);
+				if (!self.dragging && !self.options.disabled && !self.element.attr('disabled')) {
+					var allowed = self._trigger("start");
+					if (allowed !== false) {
+						self.dragging = true;
+						self.activated = false;
+					}
+					return allowed;
 				}
 			});
 			handle.add(document).bind("vmouseup", function(event) {
-				self.mousebutton = true;
 				if (self.dragging) {
-					var allowed = self._trigger("stop", event, self.element);
+					var allowed = self._trigger("stop");
 					if (allowed !== false) {
 						self._reset("fast");
 					}
@@ -124,19 +108,13 @@
 			else if (self.options.direction === "left") {
 				self.handle.css("left", "100%");
 			}
-			if (self.resetting) {
-				return; // Prevent infinite recursion
-			}
-			self.resetting = true;
 			self.activated = false;
-			self.mousebutton = false;
 			if (self.options.direction === "right") {
 				self.slider.val(0);
 			}
 			else if (self.options.direction === "left") {
 				self.slider.val(100);
 			}
-//			self.slider.slider("refresh");
 		},
 		
 		_reset: function(animationDuration) {

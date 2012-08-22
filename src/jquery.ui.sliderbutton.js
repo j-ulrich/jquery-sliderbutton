@@ -1,5 +1,5 @@
 /*
- * jQuery UI Slider Button 1.0
+ * jQuery UI Slider Button 1.1
  * http://github.com/j-ulrich/jquery-sliderbutton
  *
  * Copyright (c) 2012 Jochen Ulrich <jochenulrich@t-online.de>

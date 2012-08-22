@@ -1,4 +1,4 @@
-jQuery UI/Mobile Sliderbutton 1.0
+jQuery UI/Mobile Sliderbutton 1.1
 =================================
 
 The sliderbutton plugin provides a button which is triggered by sliding a handle to the side. This
