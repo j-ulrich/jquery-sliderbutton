@@ -47,6 +47,7 @@
 				handle: handle,
 				text: text,
 				dragging: false, // Used to determine whether we have to pay attention to global vmouseup events
+				tryingToDrag: false,
 				activated: false // Prevents multiple activations for the same slide
 			});
 
@@ -54,6 +55,9 @@
 			handle.add(self.element).unbind("keyup").unbind("keydown");
 			
 			handle.add(document).bind("vmousemove", function(event) {
+				if (self.tryingToDrag && (self.options.disabled || self.element.attr('disabled'))) {
+					self._resetSlider();
+				}
 				if (self.dragging) {
 					self.handle.attr("title","");
 					var value = Math.round(parseInt(handle.css("left")) / parseInt(handle.parent().css("width")) * 100);
@@ -75,6 +79,7 @@
 			});
 			
 			handle.bind("vmousedown", function(event) {
+				self.tryingToDrag = true;
 				if (!self.dragging && !self.options.disabled && !self.element.attr('disabled')) {
 					var allowed = self._trigger("start");
 					if (allowed !== false) {
@@ -85,6 +90,7 @@
 				}
 			});
 			handle.add(document).bind("vmouseup", function(event) {
+				self.tryingToDrag = false;
 				if (self.dragging) {
 					var allowed = self._trigger("stop");
 					if (allowed !== false) {
@@ -92,6 +98,8 @@
 					}
 					self.dragging = false;
 					return allowed;
+				} else {
+					self._resetSlider();
 				}
 			});
 			
