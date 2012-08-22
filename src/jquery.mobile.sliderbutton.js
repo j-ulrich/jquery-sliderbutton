@@ -141,22 +141,22 @@
 		
 		_reset: function(animationDuration) {
 			var self = this;
+
+			var resetValue;
+			if (self.options.direction === "right") {
+				resetValue = 0;
+			}
+			else if (self.options.direction === "left") {
+				resetValue = 100;
+			}
+
 			if (animationDuration === undefined || animationDuration === null) {
-				if (self.options.direction === "right") {
-					self.handle.css("left", 0);
-				}
-				else if (self.options.direction === "left") {
-					self.handle.css("left", "100%");
-				}
+				self.handle.css("left", resetValue+"%");
+				self._resetSlider();
 				self.text.css("opacity",self.options.opacity(0));
 			}
 			else {
-				if (self.options.direction === "right") {
-					self.handle.animate({left: 0}, animationDuration, $.proxy(self._resetSlider, self));
-				}
-				else if (self.options.direction === "left") {
-					self.handle.animate({left: "100%"}, animationDuration, $.proxy(self._resetSlider, self));
-				}
+				self.handle.animate({left: resetValue+"%"}, animationDuration, $.proxy(self._resetSlider, self));
 				self.text.animate({opacity: self.options.opacity(0)}, animationDuration);
 			}
 		},
@@ -178,6 +178,7 @@
 					self.element.addClass("ui-disabled");
 					self.element.attr("disabled", true);
 					self.text.css("opacity","");
+					self._resetSlider();
 				}
 				else if (value === false) {
 					self.element.removeClass("ui-disabled");

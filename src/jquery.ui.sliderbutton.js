@@ -74,27 +74,32 @@
 					return self._trigger("start", event, ui);
 				}
 			});
+			slider.find('.ui-slider-handle').unbind('keydown').unbind('keyup');
 		},
 		
 		_reset: function(animationDuration) {
 			var self = this;
 			self.activated = false;
+			
+			var resetValue;
+			if (self.options.direction === "right") {
+				resetValue = 0;
+			}
+			else if (self.options.direction === "left") {
+				resetValue = 100;
+			}
+			
+			function resetSliderValue() {
+				self.slider.slider("value", resetValue);
+			}
+			
 			if (animationDuration === undefined || animationDuration === null) {
-				if (self.options.direction === "right") {
-					self.handle.css("left", 0);
-				}
-				else if (self.options.direction === "left") {
-					self.handle.css("left", "100%");
-				}
+				self.handle.css("left", resetValue+"%");
+				resetSliderValue();
 				self.text.css("opacity",self.options.opacity(0));
 			}
 			else {
-				if (self.options.direction === "right") {
-					self.handle.animate({left: 0}, animationDuration);
-				}
-				else if (self.options.direction === "left") {
-					self.handle.animate({left: "100%"}, animationDuration);
-				}
+				self.handle.animate({left: resetValue+"%"}, animationDuration, resetSliderValue);
 				self.text.animate({opacity: self.options.opacity(0)}, animationDuration);
 			}
 
