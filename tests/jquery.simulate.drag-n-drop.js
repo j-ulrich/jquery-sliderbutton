@@ -15,6 +15,7 @@
 
 	$.extend( $.simulate.prototype, {
 		
+		
 		/* TODO: Implement interpolation (option: number of points between start & target) and shaky drag (option: intensity of the shake)
 		 * Alternative option for interpolation: maximal length of distance without interpolation point (-> this makes it
 		 * independent of the move distance)
@@ -25,17 +26,27 @@
 				center = findCenter( target ),
 				x = Math.floor( center.x ),
 				y = Math.floor( center.y ), 
-				dx = options.dx || 0,
-				dy = options.dy || 0,
+				dx = Math.floor( options.dx || 0 ),
+				dy = Math.floor( options.dy || 0 ),
 				coord = { clientX: x, clientY: y };
-			$.extend(this, {
-				activeDrag: {
-					dragElement: target,
-					dragStart: { x: x, y: y },
-					dragDistance: { x: dx, y: dy }
-				}
-			});
-			this.simulateEvent( target, "mousedown", coord );
+			
+			if ($.simulate.activeDrag && $.simulate.activeDrag.dragElement === target) {
+				// We just continue to move the dragged element
+				$.simulate.activeDrag.dragDistance.x += dx;
+				$.simulate.activeDrag.dragDistance.y += dy;				
+			}
+			else {
+				// We start a new drag
+				this.simulateEvent( target, "mousedown", coord );
+				$.extend($.simulate, {
+					activeDrag: {
+						dragElement: target,
+						dragStart: { x: x, y: y },
+						dragDistance: { x: dx, y: dy }
+					}
+				});
+			}
+
 			if (dx !== 0 || dy !== 0) {
 				coord = { clientX: x + dx, clientY: y + dy };
 				this.simulateEvent( document, "mousemove", coord );
@@ -55,16 +66,17 @@
 		 */
 		simulateDrop: function() {
 			var target = this.target,
+				activeDrag = $.simulate.activeDrag,
 				options = this.options,
 				center = findCenter( target ),
 				x = Math.floor( center.x ),
 				y = Math.floor( center.y ),
 				coord = { clientX: x, clientY: y };
 			
-			if (this.activeDrag && (this.activeDrag.dragDistance.x !== 0 || this.activeDrag.dragDistance.y !== 0)) {
+			if (activeDrag && (activeDrag.dragDistance.x !== 0 || activeDrag.dragDistance.y !== 0)) {
 				// We already moved the mouse during the drag so we just simulate the drop on the end position
-				x = this.activeDrag.dragStart.x + this.activeDrag.dragDistance.x;
-				y = this.activeDrag.dragStart.y + this.activeDrag.dragDistance.y;
+				x = activeDrag.dragStart.x + activeDrag.dragDistance.x;
+				y = activeDrag.dragStart.y + activeDrag.dragDistance.y;
 				coord = { clientX: x, clientY: y };
 			}
 			else {
@@ -74,7 +86,7 @@
 			
 			this.simulateEvent( target, "mouseup", coord );
 			this.simulateEvent( target, "click", coord );
-			this.activeDrag = undefined;
+			$.simulate.activeDrag = undefined;
 		},
 		
 		simulateDragNDrop: function() {
