@@ -26,19 +26,18 @@
 			
 			self.element.empty();
 			self.element.addClass("ui-sliderbutton");
+			
 			var startValue = 0;
 			if (self.options.direction === "left") {
-				self.element.addClass("ui-sliderbutton-left");
 				startValue = 100;
 			}
+			
 			var text = $('<span></span>').addClass("ui-sliderbutton-text").text(self.options.text);
 			var slider = $('<input></input>').addClass("ui-sliderbutton-input")
 				.attr("min",0).attr("max",100).attr("step",1).attr("value",startValue);
 			self.element.append(text);
 			self.element.append(slider);
-			slider.slider({
-				mini: self.options.mini
-			});
+			slider.slider();
 			var handle = self.element.find('.ui-slider-handle');
 			handle.attr("title","");
 			
@@ -50,6 +49,10 @@
 				tryingToDrag: false,
 				activated: false // Prevents multiple activations for the same slide
 			});
+
+			self._setOption("mini", self.options.mini);
+			self._setOption("direction", self.options.direction);
+			self._setOption("disabled", self.options.disabled);
 
 			// Disable key control
 			handle.add(self.element).unbind("keyup").unbind("keydown");
@@ -157,18 +160,20 @@
 				break;
 			case "mini":
 				self.element.toggleClass("ui-sliderbutton-mini",value);
-				self.slider.slider({mini: value}).slider("refresh");
+				self.slider.slider("option", "mini", value).slider("refresh");
 				break;
 			case "disabled":
 				if (value === true) {
-					self.element.addClass("ui-disabled");
+					self.element.addClass("ui-disabled ui-state-disabled");
 					self.element.attr("disabled", true);
+					self.element.attr("aria-disabled", true);
 					self.text.css("opacity","");
 					self._resetSlider();
 				}
 				else if (value === false) {
-					self.element.removeClass("ui-disabled");
+					self.element.removeClass("ui-disabled ui-state-disabled");
 					self.element.attr("disabled", false);
+					self.element.attr("aria-disabled", false);
 				}
 				break;
 			case "direction":
