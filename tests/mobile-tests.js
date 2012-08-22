@@ -73,13 +73,9 @@ $(document).ready(function() {
 		handle.simulate("drop");
 	});
 	
-	test("mini", function() {
+	test("disabled", function() {
 		var testElement = $('#sliderbuttontest');
-		testElement.sliderbutton({mini: true});
-
-		// TODO: Write test for mini option
-		ok(false, "TODO: Write test for mini option");
-		return;
+		testElement.sliderbutton({disabled: true});
 
 		ok(testElement.hasClass("ui-state-disabled"), 'Verify "disabled" class is set');
 		
@@ -105,6 +101,15 @@ $(document).ready(function() {
 		strictEqual(parseInt(handle.css("left")), 0, "The handle of a disabled sliderbutton should not move");
 		handle.simulate("drop");
 		expect(2); // The drag'n'drop should not trigger anything
+	});
+	
+	test("mini", function() {
+		var testElement = $('#sliderbuttontest');
+		testElement.sliderbutton({mini: true});
+
+		ok(testElement.hasClass("ui-sliderbutton-mini"), 'Verify mini class is set');
+		strictEqual(testElement.css("height"), "28px", 'Verifiy the mini element has the correct height');
+		strictEqual(testElement.find(".ui-sliderbutton-text").css("font-size"), "14px", 'Verify the text hast the correct font size');
 	});
 	
 	//####### Event Tests #######
