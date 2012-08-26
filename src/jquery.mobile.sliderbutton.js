@@ -63,7 +63,7 @@
 				}
 				if (self.dragging) {
 					self.handle.attr("title","");
-					var value = Math.round(parseInt(handle.css("left")) / parseInt(handle.parent().css("width")) * 100);
+					var value = Math.round(handle.position().left / handle.parent().width() * 100);
 
 					var allowed = self._trigger("slide", null, {value: value});
 					if (allowed !== false) {

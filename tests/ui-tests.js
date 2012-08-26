@@ -18,7 +18,7 @@ $(document).ready(function() {
 		ok(children.last().hasClass("ui-slider"), 'Verify the slider has been created');
 		var handles = children.last().children(".ui-slider-handle");
 		strictEqual(handles.length, 1, 'Verify the slider contains one handle');
-		strictEqual(handles.first().css("left"), "0px", 'Verify the handle is in idle position');
+		strictEqual(handles.first().position().left, 0, 'Verify the handle is in idle position');
 	});
 	
 	test("handle sliding", function() {
@@ -26,20 +26,20 @@ $(document).ready(function() {
 		testElement.sliderbutton();
 		
 		var handle = testElement.find('.ui-slider-handle').first();
-		var dx = Math.floor(parseInt(handle.parent().css("width")) / 2);
+		var dx = Math.round(handle.parent().width() / 2);
 		handle.simulate("drag", {dx: dx});
-		strictEqual(parseInt(handle.css("left")), dx, 'Verify the handle can be dragged');
+		strictEqual(handle.position().left, dx, 'Verify the handle can be dragged');
 		
 		handle.simulate("drag", {dx: -dx/2});
-		strictEqual(parseInt(handle.css("left")), Math.floor(dx/2), 'Drag back');
+		strictEqual(handle.position().left, Math.round(dx/2), 'Drag back');
 		
 		handle.simulate("drag", {dx: dx/2});
-		strictEqual(parseInt(handle.css("left")), dx, 'Drag forth');
+		strictEqual(handle.position().left, dx, 'Drag forth');
 		
 		handle.simulate("drop");
 		stop();
 		setTimeout(function() {
-			strictEqual(parseInt(handle.css("left")), 0, 'Verify the handle slides back automatically (expecting "fast" slide back)');
+			strictEqual(handle.position().left, 0, 'Verify the handle slides back automatically (expecting "fast" slide back)');
 			start();
 		}, 300);
 	});
@@ -57,8 +57,8 @@ $(document).ready(function() {
 		testElement.sliderbutton({direction: "left"});
 		ok(testElement.hasClass("ui-sliderbutton-left"), 'Verify the class is set correctly');
 		var handle = testElement.find('.ui-slider-handle').first();
-		var expectedHandlePos = parseInt(handle.parent().css("width"));
-		strictEqual(parseInt(handle.css("left")), expectedHandlePos, 'Verify the idle position is at the right side');
+		var expectedHandlePos = handle.parent().width();
+		strictEqual(handle.position().left, expectedHandlePos, 'Verify the idle position is at the right side');
 	});
 	
 	test("opacity", function() {
@@ -66,7 +66,7 @@ $(document).ready(function() {
 		testElement.sliderbutton({opacity: function() { return 1; }});
 		
 		var handle = testElement.find('.ui-slider-handle').first();
-		var dx = parseInt(handle.parent().css("width")) / 2;
+		var dx = handle.parent().width() / 2;
 		handle.simulate("drag", {dx: dx});
 		
 		equal(testElement.find('.ui-sliderbutton-text').css("opacity"), 1, "Opacity should not change");
@@ -95,10 +95,10 @@ $(document).ready(function() {
 
 		
 		var handle = testElement.find('.ui-slider-handle').first();
-		var dx = parseInt(handle.parent().css("width")) / 2;
+		var dx = handle.parent().width() / 2;
 		handle.simulate("drag", {dx: dx});
 		
-		strictEqual(parseInt(handle.css("left")), 0, "The handle of a disabled sliderbutton should not move");
+		strictEqual(handle.position().left, 0, "The handle of a disabled sliderbutton should not move");
 		handle.simulate("drop");
 		expect(2); // The drag'n'drop should not trigger anything
 	});
@@ -129,7 +129,7 @@ $(document).ready(function() {
 		var testElement = $('#sliderbuttontest');
 		testElement.sliderbutton();
 		var handle = testElement.find(".ui-slider-handle").first();
-		var dx = parseInt(handle.parent().css("width")) / 2;
+		var dx = handle.parent().width() / 2;
 
 		
 		$('#qunit-fixture').on('sliderbuttonstart', '.ui-sliderbutton', function() {
@@ -152,7 +152,7 @@ $(document).ready(function() {
 		var testElement = $('#sliderbuttontest');
 		testElement.sliderbutton();
 		var handle = testElement.find(".ui-slider-handle").first();
-		var dx = parseInt(handle.parent().css("width")) / 2;
+		var dx = handle.parent().width() / 2;
 
 		
 		$('#qunit-fixture').on('sliderbuttonstop', '.ui-sliderbutton', function() {
@@ -170,7 +170,7 @@ $(document).ready(function() {
 		var testElement = $('#sliderbuttontest');
 		testElement.sliderbutton();
 		var handle = testElement.find(".ui-slider-handle").first();
-		var dx = parseInt(handle.parent().css("width"));
+		var dx = handle.parent().width();
 
 		
 		$('#qunit-fixture').on('sliderbuttonactivate', '.ui-sliderbutton', function() {
@@ -235,7 +235,7 @@ $(document).ready(function() {
 		testElement.sliderbutton();
 		
 		var handle = testElement.find(".ui-slider-handle").first();
-		var dx = parseInt(handle.parent().css("width")) / 2;
+		var dx = handle.parent().width() / 2;
 		
 		// Trigger start and slide
 		expectedEvents.push('start', 'slide');
@@ -272,7 +272,7 @@ $(document).ready(function() {
 		});
 		
 		var handle = testElement.find('.ui-slider-handle').first();
-		var dx = parseInt(handle.parent().css("width")) / 2;
+		var dx = handle.parent().width() / 2;
 		handle.simulate("drag-n-drop", {dx: dx});
 	});
 	
