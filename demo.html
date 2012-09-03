@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+	<link rel="stylesheet" href="jquery.mobile.sliderbutton.css" />
+	<style type="text/css">
+		#ui-example {
+		width: 70%;
+		}
+
+		#example-log {
+			width: 70%;
+			margin-top: 1em;
+			margin-bottom: 2em;
+		}
+		
+		div[data-role="page"]{
+			min-height: 0 !important;
+			background: #FBFBFB !important;
+		}
+		
+		.ui-mobile {
+			min-height: 0 !important;
+		}
+		
+		body {
+			background: #FBFBFB !important;
+		}
+		
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+	<script src="jquery.mobile.sliderbutton.js"></script>
+	<script type="text/javascript">
+		$('#body-page').live("pageinit", function() {
+			$("#ui-example").sliderbutton({
+				activate: function() {
+					$('#example-log').val('Activated at '+ (new Date()).toString());
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	<div data-role="page" id="body-page">
+		<div id="ui-example"></div>
+		<input id="example-log" type="text" readonly="readonly"></input>
+	</div>
+</body>
+</html>

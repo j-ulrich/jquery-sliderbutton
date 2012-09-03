@@ -14,12 +14,6 @@ $(window).resize(sectionHeight);
 
 $(document).ready(function(){
 
-  $("#ui-example").sliderbutton({
-    activate: function() {
-      $('#example-log').val('Activated at '+ (new Date()).toString());
-    }
-  });
-
   $("section h1, section h2").each(function(){
     $("nav ul").append("<li class='tag-" + this.nodeName.toLowerCase() + "'><a href='#" + $(this).text().toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g,'') + "'>" + $(this).text() + "</a></li>");
     $(this).attr("id",$(this).text().toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g,''));

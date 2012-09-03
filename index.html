@@ -9,11 +9,7 @@
     <title>jquery-sliderbutton by j-ulrich</title>
     <link rel="stylesheet" href="stylesheets/styles.css" />
     <link rel="stylesheet" href="stylesheets/pygment_trac.css" />
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
-    <link rel="stylesheet" href="jquery.mobile.sliderbutton.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
-    <script src="jquery.mobile.sliderbutton.js"></script>
     <script src="javascripts/main.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -21,15 +17,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
     <style type="text/css">
-        #ui-example {
-            width: 70%;
-        }
-
-        #example-log {
-            width: 70%;
-            margin-top: 1em;
-            margin-bottom: 2em;
-        }
+    	#demo-iframe {
+    		width: 100%;
+    		border: 0;
+    	}
         
         #banner .github-links {
             left: 50%;
@@ -101,8 +92,7 @@
 is a simple technique to avoid accidentally pressing a button.</p>
 
 <h4>Demo:</h4>
-<div id="ui-example"></div>
-<input id="example-log" type="text" readonly="readonly"></input>
+<iframe id="demo-iframe" src="demo.html"></iframe>
 
 <p>The plugin is based on the jQuery UI/Mobile slider widget. Since this widget differs in its
 implementation in jQuery UI and jQuery mobile, the plugin comes in two versions: one for jQuery UI
