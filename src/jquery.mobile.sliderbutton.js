@@ -47,6 +47,7 @@
 				text: text,
 				dragging: false, // Used to determine whether we have to pay attention to global vmouseup events
 				tryingToDrag: false,
+				lastVal: 0, // Remember last value to prevent triggering "slide" multiple times for the same value
 				activated: false // Prevents multiple activations for the same slide
 			});
 
@@ -65,6 +66,11 @@
 					self.handle.attr("title","");
 					var value = Math.round(handle.position().left / handle.parent().width() * 100);
 
+					if (value === self.lastVal) {
+						return true;
+					}
+					self.lastVal = value;
+					
 					var allowed = self._trigger("slide", null, {value: value});
 					if (allowed !== false) {
 						self.text.css("opacity",self.options.opacity((self.options.direction === "left"?(100-value):value)));
@@ -122,9 +128,11 @@
 			self.activated = false;
 			if (self.options.direction === "right") {
 				self.slider.val(0);
+				self.lastVal = 0;
 			}
 			else if (self.options.direction === "left") {
 				self.slider.val(100);
+				self.lastVal = 100;
 			}
 		},
 		

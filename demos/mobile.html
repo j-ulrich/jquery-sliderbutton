@@ -62,7 +62,12 @@
 	function logActivated() {
 		var log = $('#log');
 		log.val(log.val()+$(this).attr("id")+"\n");
-	};
+	}
+	
+	function logSlide(event, ui) {
+		var log = $('#log');
+		log.val(log.val()+$(this).attr("id")+" slide (value: "+ui.value+")\n");
+	}
 	
 	$('#plain').sliderbutton({
 		activate: logActivated

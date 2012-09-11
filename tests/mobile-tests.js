@@ -31,7 +31,7 @@ $(document).ready(function() {
 		strictEqual(handle.position().left, dx, 'Verify the handle can be dragged');
 		
 		handle.simulate("drag", {dx: -dx/2});
-		strictEqual(handle.position().left, Math.round(dx/2), 'Drag back');
+		strictEqual(handle.position().left, Math.floor(dx/2), 'Drag back');
 		
 		handle.simulate("drag", {dx: dx/2});
 		strictEqual(handle.position().left, dx, 'Drag forth');
