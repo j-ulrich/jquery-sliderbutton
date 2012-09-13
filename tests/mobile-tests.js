@@ -79,17 +79,17 @@ $(document).ready(function() {
 
 		ok(testElement.hasClass("ui-state-disabled"), 'Verify "disabled" class is set');
 		
-		$('#qunit-fixture .ui-sliderbutton').live('sliderbuttonstart', function() {
+		$('#qunit-fixture').on('sliderbuttonstart', '.ui-sliderbutton', function() {
 			ok(false, "Disabled widgets should not trigger start");
 		});
-		$('#qunit-fixture .ui-sliderbutton').live('sliderbuttonstop', function() {
+		$('#qunit-fixture').on('sliderbuttonstop', '.ui-sliderbutton', function() {
 			ok(false, "Disabled widgets should not trigger stop");
 		});
-		$('#qunit-fixture .ui-sliderbutton').live('sliderbuttonslide', function() {
+		$('#qunit-fixture').on('sliderbuttonslide', '.ui-sliderbutton', function() {
 			ok(false, "Disabled widgets should not trigger slide");
 		});
 
-		$('#qunit-fixture .ui-sliderbutton').live('sliderbuttonactivate', function() {
+		$('#qunit-fixture').on('sliderbuttonactivate', '.ui-sliderbutton', function() {
 			ok(false, "Disabled widgets should not trigger activate");
 		});
 
@@ -115,7 +115,7 @@ $(document).ready(function() {
 	//####### Event Tests #######
 	module('event tests', {
 		teardown: function() {
-			$('#qunit-fixture .ui-sliderbutton').die();
+			$('#qunit-fixture').off();
 			$('#sliderbuttontest .ui-slider-handle').simulate("drop");
 		}
 	});
@@ -123,7 +123,7 @@ $(document).ready(function() {
 	test("trigger create", function() {
 		expect(1);
 		
-		$('#qunit-fixture .ui-sliderbutton').live('sliderbuttoncreate', function() {
+		$('#qunit-fixture').on('sliderbuttoncreate', '.ui-sliderbutton', function() {
 			ok(true, "create triggered");
 		});
 		
@@ -141,12 +141,12 @@ $(document).ready(function() {
 		var dx = handle.parent().width() / 2;
 
 		
-		$('#qunit-fixture .ui-sliderbutton').live('sliderbuttonstart', function() {
+		$('#qunit-fixture').on('sliderbuttonstart', '.ui-sliderbutton', function() {
 			strictEqual('start', expectedEvents[expectedEventsIndex], "start triggered");
 			expectedEventsIndex += 1;
 		});
 
-		$('#qunit-fixture .ui-sliderbutton').live('sliderbuttonslide', function(event, ui) {
+		$('#qunit-fixture').on('sliderbuttonslide', '.ui-sliderbutton', function(event, ui) {
 			strictEqual('slide', expectedEvents[expectedEventsIndex], "slide triggered");
 			strictEqual(ui.value, 50, "Verify slide event provides correct value");
 			expectedEventsIndex += 1;
@@ -164,7 +164,7 @@ $(document).ready(function() {
 		var dx = handle.parent().width() / 2;
 
 		
-		$('#qunit-fixture .ui-sliderbutton').live('sliderbuttonstop', function() {
+		$('#qunit-fixture').on('sliderbuttonstop', '.ui-sliderbutton', function() {
 			ok(true, "stop triggered");
 		});
 
@@ -182,7 +182,7 @@ $(document).ready(function() {
 		var dx = handle.parent().width();
 
 		
-		$('#qunit-fixture .ui-sliderbutton').live('sliderbuttonactivate', function() {
+		$('#qunit-fixture').on('sliderbuttonactivate', '.ui-sliderbutton', function() {
 			ok(true, "activate triggered");
 		});
 
@@ -216,23 +216,23 @@ $(document).ready(function() {
 			}
 		}
 		
-		$('#qunit-fixture .ui-sliderbutton').live('sliderbuttoncreate', function() {
+		$('#qunit-fixture').on('sliderbuttoncreate', '.ui-sliderbutton', function() {
 			assertExpectedEvent("create");
 		});
 
-		$('#qunit-fixture .ui-sliderbutton').live('sliderbuttonstart', function() {
+		$('#qunit-fixture').on('sliderbuttonstart', '.ui-sliderbutton', function() {
 			assertExpectedEvent("start");
 		});
 
-		$('#qunit-fixture .ui-sliderbutton').live('sliderbuttonslide', function(event, ui) {
+		$('#qunit-fixture').on('sliderbuttonslide', '.ui-sliderbutton', function(event, ui) {
 			assertExpectedEvent("slide", "slide triggered (value: "+ui.value+")");
 		});
 
-		$('#qunit-fixture .ui-sliderbutton').live('sliderbuttonstop', function() {
+		$('#qunit-fixture').on('sliderbuttonstop', '.ui-sliderbutton', function() {
 			assertExpectedEvent("stop");
 		});
 		
-		$('#qunit-fixture .ui-sliderbutton').live('sliderbuttonactivate', function() {
+		$('#qunit-fixture').on('sliderbuttonactivate', '.ui-sliderbutton', function() {
 			assertExpectedEvent("activate");
 		});
 
@@ -277,7 +277,7 @@ $(document).ready(function() {
 		var testElement = $('#sliderbuttontest');
 		testElement.sliderbutton({tolerance: 70});
 		
-		$('#qunit-fixture .ui-sliderbutton').live('sliderbuttonactivate', function() {
+		$('#qunit-fixture').on('sliderbuttonactivate', '.ui-sliderbutton', function() {
 			ok(true, "activate triggered");
 		});
 		
