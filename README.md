@@ -101,7 +101,7 @@ Methods
 Requirements
 ------------
 The plugin requires
-* [jQuery 1.3.2+](http://jquery.com)
+* [jQuery 1.4.1+](http://jquery.com)
 * [jQuery UI 1.8+](http://jqueryui.com) (including the slider widget) **or** [jQuery Mobile](http://jquerymobile.com)
 
 Compatibility
