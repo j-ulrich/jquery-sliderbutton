@@ -1,15 +1,42 @@
-/*
- * jQuery Mobile Slider Button 1.1
+/*jslint white: true vars: true browser: true todo: true */
+/*jshint camelcase:true, plusplus:true, forin:true, noarg:true, noempty:true, eqeqeq:true, bitwise:true, strict:true, undef:true, unused:true, curly:true, browser:true, devel:true, maxerr:100, white:false, onevar:false */
+/*global jQuery:true $:true */
+
+/* jQuery Mobile Slider Button 1.1
  * http://github.com/j-ulrich/jquery-sliderbutton
  *
  * Copyright (c) 2012 Jochen Ulrich <jochenulrich@t-online.de>
  * Licensed under the MIT license (MIT-LICENSE.txt).
  */
 
+/**
+ * @file jQuery Mobile Slider Button
+ * @version 1.1
+ * @copyright 2012 Jochen Ulrich
+ * @license MIT (MIT-LICENSE.txt)
+ */
+
 (function($) {
-	$.widget("mobile.sliderbutton", {
+
+	/**
+	 * Constructs a mobile sliderbutton.
+	 * @name sliderbutton
+	 * @public
+	 * @function
+	 * @memberOf jQuery.mobile
+	 */
+	$.widget("mobile.sliderbutton",
+	
+	/**
+	 * @lends jQuery.mobile.sliderbutton.prototype
+	 */
+	{
 		
 		// Options
+		/**
+		 * Default values of the options.
+		 * @since 1.0
+		 */
 		options: {
 			text: "slide to unlock",
 			disabled: false,
@@ -21,6 +48,12 @@
 			}
 		},
 		
+		/**
+		 * Constructor for mobile sliderbuttons.
+		 * @private
+		 * @author julrich
+		 * @since 1.0
+		 */
 		_create: function() {
 			var self = this;
 			
@@ -115,6 +148,12 @@
 			
 		},
 		
+		/**
+		 * Forces the slider handle into idle position.
+		 * @private
+		 * @author julrich
+		 * @since 1.0
+		 */
 		_resetSlider: function() {
 			var self = this;
 			
@@ -136,6 +175,16 @@
 			}
 		},
 		
+		/**
+		 * Resets the slider, ensuring that the handle moves into/is in idle position.
+		 * @param {Numeric|String|Null} animationDuration - If given and not <code>null</code>,
+		 * the resetting is performed asynchronously using jQuery's <code>.animate()</code> function.
+		 * <i>animationDuration</i> then defines the duration of the animation. If not given or
+		 * <code>null</code>, the resetting is performed instantly.
+		 * @private
+		 * @author julrich
+		 * @since 1.0
+		 */
 		_reset: function(animationDuration) {
 			var self = this;
 
@@ -148,7 +197,6 @@
 			}
 
 			if (animationDuration === undefined || animationDuration === null) {
-				self.handle.css("left", resetValue+"%");
 				self._resetSlider();
 				self.text.css("opacity",self.options.opacity(0));
 			}
@@ -158,6 +206,14 @@
 			}
 		},
 		
+		/**
+		 * Changes an option.
+		 * @param {String} option - name of the option to be set.
+		 * @param value - new value for the option.
+		 * @private
+		 * @author julrich
+		 * @since 1.0
+		 */
 		_setOption: function(option, value) {
 			var self = this;
 			$.Widget.prototype._setOption.apply( self, arguments );

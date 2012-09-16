@@ -1,15 +1,42 @@
-/*
- * jQuery UI Slider Button 1.1
+/*jslint white: true vars: true browser: true todo: true */
+/*jshint camelcase:true, plusplus:true, forin:true, noarg:true, noempty:true, eqeqeq:true, bitwise:true, strict:true, undef:true, unused:true, curly:true, browser:true, devel:true, maxerr:100, white:false, onevar:false */
+/*global jQuery:true $:true */
+
+/* jQuery UI Slider Button 1.1
  * http://github.com/j-ulrich/jquery-sliderbutton
  *
  * Copyright (c) 2012 Jochen Ulrich <jochenulrich@t-online.de>
  * Licensed under the MIT license (MIT-LICENSE.txt).
  */
 
+/**
+ * @file jQuery UI Slider Button
+ * @version 1.1
+ * @copyright 2012 Jochen Ulrich
+ * @license MIT (MIT-LICENSE.txt)
+ */
+
 (function($) {
-	$.widget("ui.sliderbutton", {
+	
+	/**
+	 * Constructs a UI sliderbutton.
+	 * @name sliderbutton
+	 * @public
+	 * @function
+	 * @memberOf jQuery.ui
+	 */
+	$.widget("ui.sliderbutton",
+	
+	/**
+	 * @lends jQuery.ui.sliderbutton.prototype
+	 */
+	{
 		
 		// Options
+		/**
+		 * Default values of the options.
+		 * @since 1.0
+		 */
 		options: {
 			text: "slide to unlock",
 			direction: "right",
@@ -19,6 +46,12 @@
 			}
 		},
 		
+		/**
+		 * Constructor for UI sliderbuttons.
+		 * @private
+		 * @author julrich
+		 * @since 1.0
+		 */
 		_create: function() {
 			var self = this;
 			
@@ -46,7 +79,7 @@
 				activated: false // Prevents multiple activations for the same slide
 			});
 
-			
+			// Create and configure the jQuery UI slider
 			slider.slider({
 				animate: true,
 				value: startValue,
@@ -77,6 +110,16 @@
 			slider.find('.ui-slider-handle').unbind('keydown').unbind('keyup');
 		},
 		
+		/**
+		 * Resets the slider, ensuring that the handle moves into/is in idle position.
+		 * @param {Numeric|String|Null} animationDuration - If given and not <code>null</code>,
+		 * the resetting is performed asynchronously using jQuery's <code>.animate()</code> function.
+		 * <i>animationDuration</i> then defines the duration of the animation. If not given or
+		 * <code>null</code>, the resetting is performed instantly.
+		 * @private
+		 * @author julrich
+		 * @since 1.0
+		 */
 		_reset: function(animationDuration) {
 			var self = this;
 			self.activated = false;
@@ -89,11 +132,18 @@
 				resetValue = 100;
 			}
 			
+			/**
+			 * Sets the UI slider value to the resetValue to synchronize it with the handle position
+			 * @requires resetValue
+			 * @inner
+			 * @author julrich
+			 * @since 1.0
+			 */
 			function resetSliderValue() {
 				self.slider.slider("value", resetValue);
 			}
 			
-			if (animationDuration === undefined || animationDuration === null) {
+			if ( animationDuration === undefined || animationDuration === null || (typeof animationDuration !== "number" && typeof animationDuration !== "string") ) {
 				self.handle.css("left", resetValue+"%");
 				resetSliderValue();
 				self.text.css("opacity",self.options.opacity(0));
@@ -105,6 +155,11 @@
 
 		},
 		
+		/**
+		 * Restores the element to it's original state.
+		 * @author julrich
+		 * @since 1.0
+		 */
 		destroy: function() {
 			var self = this;
 			self.slider.slider("destroy");
@@ -112,6 +167,14 @@
 			self.element.removeClass("ui-sliderbutton ui-sliderbutton-left");
 		},
 		
+		/**
+		 * Changes an option.
+		 * @param {String} option - name of the option to be set.
+		 * @param value - new value for the option.
+		 * @private
+		 * @author julrich
+		 * @since 1.0
+		 */
 		_setOption: function(option, value) {
 			var self = this;
 			$.Widget.prototype._setOption.apply( self, arguments );
