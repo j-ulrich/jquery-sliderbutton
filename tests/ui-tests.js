@@ -26,15 +26,15 @@ $(document).ready(function() {
 		testElement.sliderbutton();
 		
 		var handle = testElement.find('.ui-slider-handle').first();
-		var dx = handle.parent().width() / 2;
+		var dx = Math.round(handle.parent().width() / 2);
 		handle.simulate("drag", {dx: dx});
-		strictEqual(handle.position().left, dx, 'Verify the handle can be dragged');
+		QUnit.close(handle.position().left, dx, 0.5, 'Verify the handle can be dragged');
 		
 		handle.simulate("drag", {dx: -dx/2});
-		strictEqual(handle.position().left, Math.floor(dx/2), 'Drag back');
+		QUnit.close(handle.position().left, dx/2, 0.5, 'Drag back');
 		
 		handle.simulate("drag", {dx: dx/2});
-		strictEqual(handle.position().left, dx, 'Drag forth');
+		QUnit.close(handle.position().left, dx, 0.5, 'Drag forth');
 		
 		handle.simulate("drop");
 		stop();
