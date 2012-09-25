@@ -10,6 +10,18 @@ and one for jQuery Mobile. The plugin tries to hide the differences between the 
 that the API documented below applies to both versions (exceptions are marked accordingly) but the
 generated markup and CSS differs.
 
+#### Table of Contents ####
+- [Initialization & Usage](#initialization--usage)
+	- [Example](#example)
+	- [Demos](#demos)
+- [Options](#options)
+- [Events](#events)
+- [Methods](#methods)
+- [Requirements](#requirements)
+- [Compatibility](#compatibility)
+- [Licensing](#licensing)
+
+
 Initialization & Usage
 ----------------------
 The sliderbutton is created from a div element. When the sliderbutton is activated, the `activate`
