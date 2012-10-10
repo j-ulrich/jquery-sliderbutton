@@ -1,0 +1,40 @@
+{
+	"name": "jquery-sliderbutton",
+	"description": "",
+	"version": "1.2.0",
+	"keywords": [],
+	"maintainers": [{
+		"name": "Jochen Ulrich",
+		"email": "jochenulrich@t-online.de",
+		"web": "https://github.com/j-ulrich"
+	}],
+	"contributors": [{
+		"name": "Jochen Ulrich",
+		"email": "jochenulrich@t-online.de",
+		"web": "https://github.com/j-ulrich"
+	}],
+	"bugs": "https://github.com/j-ulrich/jquery-sliderbutton/issues",
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "http://github.com/j-ulrich/jquery-sliderbutton/MIT-LICENSE.txt"
+		}
+	],
+	"repositories": {
+		"type": "git",
+		"url": "https://github.com/j-ulrich/jquery-sliderbutton.git"
+	},
+	"dependencies": {
+		"jquery": "1.7.0"
+	},
+
+	
+	
+	"homepage": "https://github.com/j-ulrich/jquery-sliderbutton",
+	"scripts": {
+		"test": "grunt qunit"
+	},
+	"devDependencies": {
+		"grunt": "0.3.16"
+	}
+}

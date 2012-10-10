@@ -2,7 +2,7 @@
 /*jshint camelcase:true, plusplus:true, forin:true, noarg:true, noempty:true, eqeqeq:true, bitwise:true, strict:true, undef:true, unused:true, curly:true, browser:true, devel:true, maxerr:100, white:false, onevar:false */
 /*global jQuery:true $:true */
 
-/* jQuery Mobile Slider Button 1.1
+/* jQuery Mobile Slider Button 1.2.0
  * http://github.com/j-ulrich/jquery-sliderbutton
  *
  * Copyright (c) 2012 Jochen Ulrich <jochenulrich@t-online.de>
@@ -17,18 +17,19 @@
  */
 
 (function($) {
+	"use strict";
 
 	/**
 	 * Constructs a mobile sliderbutton.
 	 * @name sliderbutton
 	 * @public
 	 * @function
-	 * @memberOf jQuery.mobile
+	 * @memberOf jQuery.ju
 	 */
-	$.widget("mobile.sliderbutton",
+	$.widget("ju.sliderbutton",
 	
 	/**
-	 * @lends jQuery.mobile.sliderbutton.prototype
+	 * @lends jQuery.ju.sliderbutton.prototype
 	 */
 	{
 		
@@ -58,15 +59,15 @@
 			var self = this;
 			
 			self.element.empty();
-			self.element.addClass("ui-sliderbutton");
+			self.element.addClass("ju-sliderbutton");
 			
 			var startValue = 0;
 			if (self.options.direction === "left") {
 				startValue = 100;
 			}
 			
-			var text = $('<span></span>').addClass("ui-sliderbutton-text").text(self.options.text);
-			var slider = $('<input></input>').addClass("ui-sliderbutton-input")
+			var text = $('<span></span>').addClass("ju-sliderbutton-text").text(self.options.text);
+			var slider = $('<input></input>').addClass("ju-sliderbutton-input")
 				.attr("min",0).attr("max",100).attr("step",1).attr("value",startValue);
 			self.element.append(text);
 			self.element.append(slider);
@@ -107,8 +108,8 @@
 					var allowed = self._trigger("slide", null, {value: value});
 					if (allowed !== false) {
 						self.text.css("opacity",self.options.opacity((self.options.direction === "left"?(100-value):value)));
-						if ( (self.activated === false) && ((self.options.direction === "right" && value >= (100-self.options.tolerance))
-								|| (self.options.direction === "left" && value <= (0+self.options.tolerance))) ) {
+						if ( (self.activated === false) && ((self.options.direction === "right" && value >= (100-self.options.tolerance)) ||
+								(self.options.direction === "left" && value <= (0+self.options.tolerance))) ) {
 							self._trigger("activate");
 							self.activated = true;
 						}
@@ -223,7 +224,7 @@
 				self.text.text(value);
 				break;
 			case "mini":
-				self.element.toggleClass("ui-sliderbutton-mini",value);
+				self.element.toggleClass("ju-sliderbutton-mini",value);
 				self.slider.slider("option", "mini", value).slider("refresh");
 				break;
 			case "disabled":
@@ -242,17 +243,17 @@
 				break;
 			case "direction":
 				if (value === "right") {
-					self.element.removeClass("ui-sliderbutton-left");
+					self.element.removeClass("ju-sliderbutton-left");
 				}
 				else if (value === "left") {
-					self.element.addClass("ui-sliderbutton-left");
+					self.element.addClass("ju-sliderbutton-left");
 				}
 				self._resetSlider();
 				break;
 			default:
 				break;
 			}
-		},
+		}
 
 	});
 	

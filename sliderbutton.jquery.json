@@ -1,0 +1,33 @@
+{
+	"name": "sliderbutton",
+	"version": "1.2.0",
+	"title": "jquery-sliderbutton",
+	"author": {
+		"name": "Jochen Ulrich",
+		"email": "jochenulrich@t-online.de",
+		"url": "https://github.com/j-ulrich"
+	},
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "http://github.com/j-ulrich/jquery-sliderbutton/MIT-LICENSE.txt"
+		}
+	],
+	"dependencies": {
+		"jquery": "~1.7",
+		"ui.core": "~1.8",
+		"ui.widget": "~1.8",
+		"ui.css": "~1.8",
+		"ui.slider": "~1.8",
+		"mobile": "~1.0"
+	},
+	
+	
+	
+	"description": "",
+	"keywords": [],
+	"homepage": "https://j-ulrich.github.com/jquery-sliderbutton",
+	"docs": "https://github.com/j-ulrich/jquery-sliderbutton/blob/master/README.md",
+	"demo": "http://jsfiddle.net/Ignitor/VY5FC/embedded/result/",
+	"bugs": "https://github.com/j-ulrich/jquery-sliderbutton/issues"
+}

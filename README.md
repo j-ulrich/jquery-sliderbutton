@@ -1,5 +1,5 @@
-jQuery UI/Mobile Sliderbutton 1.1
-=================================
+jQuery UI/Mobile Sliderbutton 1.2.0
+===================================
 
 The sliderbutton plugin provides a button which is triggered by sliding a handle to the side. This
 is a simple technique to avoid accidentally pressing a button.
@@ -114,7 +114,7 @@ Requirements
 ------------
 The plugin requires
 * [jQuery 1.7.0+](http://jquery.com)
-* [jQuery UI 1.8+](http://jqueryui.com) (including the slider widget) **or** [jQuery Mobile](http://jquerymobile.com)
+* [jQuery UI 1.8+](http://jqueryui.com) (including the slider widget) **or** [jQuery Mobile 1.0+](http://jquerymobile.com)
 
 Compatibility
 ------------

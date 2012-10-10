@@ -2,7 +2,7 @@
 /*jshint camelcase:true, plusplus:true, forin:true, noarg:true, noempty:true, eqeqeq:true, bitwise:true, strict:true, undef:true, unused:true, curly:true, browser:true, devel:true, maxerr:100, white:false, onevar:false */
 /*global jQuery:true $:true */
 
-/* jQuery UI Slider Button 1.1
+/* jQuery UI Slider Button 1.2.0
  * http://github.com/j-ulrich/jquery-sliderbutton
  *
  * Copyright (c) 2012 Jochen Ulrich <jochenulrich@t-online.de>
@@ -17,18 +17,19 @@
  */
 
 (function($) {
+	"use strict";
 	
 	/**
 	 * Constructs a UI sliderbutton.
 	 * @name sliderbutton
 	 * @public
 	 * @function
-	 * @memberOf jQuery.ui
+	 * @memberOf jQuery.ju
 	 */
-	$.widget("ui.sliderbutton",
+	$.widget("ju.sliderbutton",
 	
 	/**
-	 * @lends jQuery.ui.sliderbutton.prototype
+	 * @lends jQuery.ju.sliderbutton.prototype
 	 */
 	{
 		
@@ -56,19 +57,19 @@
 			var self = this;
 			
 			self.element.empty();
-			self.element.addClass("ui-sliderbutton");
+			self.element.addClass("ju-sliderbutton");
 			if (self.options.disabled === true) {
 				self.element.addClass("ui-state-disabled");
 			}
-			var text = $('<span></span>').addClass("ui-sliderbutton-text").text(self.options.text);
-			var slider = $('<div></div>').addClass("ui-sliderbutton-slider");
+			var text = $('<span></span>').addClass("ju-sliderbutton-text").text(self.options.text);
+			var slider = $('<div></div>').addClass("ju-sliderbutton-slider");
 			var handle = $('<div></div>').addClass("ui-slider-handle");
 			slider.append(handle);
 			self.element.append(text);
 			self.element.append(slider);
 			var startValue = 0;
 			if (self.options.direction === "left") {
-				self.element.addClass("ui-sliderbutton-left");
+				self.element.addClass("ju-sliderbutton-left");
 				startValue = 100;
 			}
 			
@@ -88,8 +89,8 @@
 					var allowed = self._trigger("slide", event, ui);
 					if (allowed !== false) {
 						self.text.css("opacity",self.options.opacity((self.options.direction === "left"?(100-ui.value):ui.value)));
-						if ( (self.activated === false) && ((self.options.direction === "right" && ui.value >= (100-self.options.tolerance))
-								|| (self.options.direction === "left" && ui.value <= (0+self.options.tolerance))) ) {
+						if ( (self.activated === false) && ((self.options.direction === "right" && ui.value >= (100-self.options.tolerance)) ||
+								(self.options.direction === "left" && ui.value <= (0+self.options.tolerance))) ) {
 							self._trigger("activate", event, ui);
 							self.activated = true;
 						}
@@ -164,7 +165,7 @@
 			var self = this;
 			self.slider.slider("destroy");
 			self.element.empty();
-			self.element.removeClass("ui-sliderbutton ui-sliderbutton-left");
+			self.element.removeClass("ju-sliderbutton ju-sliderbutton-left");
 		},
 		
 		/**
@@ -198,10 +199,10 @@
 				break;
 			case "direction":
 				if (value === "right") {
-					self.element.removeClass("ui-sliderbutton-left");
+					self.element.removeClass("ju-sliderbutton-left");
 				}
 				else if (value === "left") {
-					self.element.addClass("ui-sliderbutton-left");
+					self.element.addClass("ju-sliderbutton-left");
 				}
 				self._reset();
 				break;

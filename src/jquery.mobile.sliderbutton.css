@@ -1,12 +1,12 @@
 /*
- * jQuery UI Slider Button 1.0
+ * jQuery UI Slider Button 1.2.0
  * http://github.com/j-ulrich/jquery-sliderbutton
  *
  * Copyright (c) 2012 Jochen Ulrich <jochenulrich@t-online.de>
  * Licensed under the MIT license (MIT-LICENSE.txt).
  */
 
-.ui-sliderbutton {
+.ju-sliderbutton {
 	/*background-color: #000000;*/
 	
 	background: #45484d;
@@ -23,15 +23,15 @@
 	text-align: right;
 }
 
-.ui-sliderbutton.ui-sliderbutton-mini {
+.ju-sliderbutton.ju-sliderbutton-mini {
 	height: 28px;
 }
 
-.ui-sliderbutton-left {
+.ju-sliderbutton-left {
 	text-align: left;
 }
 
-.ui-sliderbutton .ui-sliderbutton-text {
+.ju-sliderbutton .ju-sliderbutton-text {
 	color: #FFFFFF;
 	line-height: 50px;
 	margin-right: 1em;
@@ -44,21 +44,21 @@
 	user-select: none;
 }
 
-.ui-sliderbutton.ui-sliderbutton-mini .ui-sliderbutton-text {
+.ju-sliderbutton.ju-sliderbutton-mini .ju-sliderbutton-text {
 	line-height: 28px;
 	font-size: 14px;
 }
 
-.ui-sliderbutton-left .ui-sliderbutton-text {
+.ju-sliderbutton-left .ju-sliderbutton-text {
 	margin-right: 0px;
 	margin-left: 1em;
 }
 
-.ui-sliderbutton .ui-sliderbutton-input {
+.ju-sliderbutton .ju-sliderbutton-input {
 	display: none;
 }
 
-.ui-sliderbutton .ui-slider {
+.ju-sliderbutton .ui-slider {
 	background: transparent;
 	height: 0px;
 	border: none;
@@ -70,11 +70,11 @@
 	width: auto;
 }
 
-.ui-sliderbutton.ui-sliderbutton-mini .ui-slider {
+.ju-sliderbutton.ju-sliderbutton-mini .ui-slider {
 	margin-top: -28px;
 }
 
-.ui-sliderbutton .ui-slider .ui-slider-handle {
+.ju-sliderbutton .ui-slider .ui-slider-handle {
 	background-image: url("./images/sliderbutton-handle.png");
 	background-position: center;
 	border-radius: 16px;
@@ -86,12 +86,12 @@
 	position: relative;
 }
 
-.ui-sliderbutton.ui-sliderbutton-mini .ui-slider .ui-slider-handle {
+.ju-sliderbutton.ju-sliderbutton-mini .ui-slider .ui-slider-handle {
 	height: 28px;
 }
 
 
-.ui-sliderbutton-left .ui-slider-handle {
+.ju-sliderbutton-left .ui-slider-handle {
 	-webkit-transform: scale(-1, 1);
 	-moz-transform: scale(-1, 1);
 	-o-transform: scale(-1, 1);
