@@ -1,7 +1,7 @@
 {
 	"name": "sliderbutton",
 	"version": "1.2.0",
-	"title": "jquery-sliderbutton",
+	"title": "jQuery Sliderbutton",
 	"author": {
 		"name": "Jochen Ulrich",
 		"email": "jochenulrich@t-online.de",
@@ -25,7 +25,7 @@
 	
 	
 	"description": "",
-	"keywords": [],
+	"keywords": ["slide", "slider", "ui", "mobile", "lock"],
 	"homepage": "https://j-ulrich.github.com/jquery-sliderbutton",
 	"docs": "https://github.com/j-ulrich/jquery-sliderbutton/blob/master/README.md",
 	"demo": "http://jsfiddle.net/Ignitor/VY5FC/embedded/result/",
