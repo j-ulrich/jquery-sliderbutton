@@ -1,8 +1,8 @@
 {
 	"name": "jquery-sliderbutton",
-	"description": "",
-	"version": "1.2.0",
-	"keywords": [],
+	"description": 'jQuery UI/Mobile plugin providing a slider-based button ("slide to unlock")',
+	"version": "1.2.1",
+	"keywords": ["slide", "slider", "ui", "mobile", "lock"],
 	"maintainers": [{
 		"name": "Jochen Ulrich",
 		"email": "jochenulrich@t-online.de",
@@ -17,7 +17,7 @@
 	"licenses": [
 		{
 			"type": "MIT",
-			"url": "http://github.com/j-ulrich/jquery-sliderbutton/MIT-LICENSE.txt"
+			"url": "http://github.com/j-ulrich/jquery-sliderbutton/blob/master/MIT-LICENSE.txt"
 		}
 	],
 	"repositories": {
