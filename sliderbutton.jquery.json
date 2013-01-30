@@ -1,6 +1,6 @@
 {
 	"name": "sliderbutton",
-	"version": "1.2.1",
+	"version": "1.2.2",
 	"title": "jQuery Sliderbutton",
 	"author": {
 		"name": "Jochen Ulrich",
@@ -24,7 +24,7 @@
 	
 	
 	
-	"description": 'jQuery UI/Mobile plugin providing a slider-based button ("slide to unlock")',
+	"description": "jQuery UI/Mobile plugin providing a slider-based button (\"slide to unlock\")",
 	"keywords": ["slide", "slider", "ui", "mobile", "lock"],
 	"homepage": "http://j-ulrich.github.com/jquery-sliderbutton",
 	"docs": "https://github.com/j-ulrich/jquery-sliderbutton/blob/master/README.md",

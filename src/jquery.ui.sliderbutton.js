@@ -1,8 +1,8 @@
-/*jslint white: true vars: true browser: true todo: true */
 /*jshint camelcase:true, plusplus:true, forin:true, noarg:true, noempty:true, eqeqeq:true, bitwise:true, strict:true, undef:true, unused:true, curly:true, browser:true, devel:true, maxerr:100, white:false, onevar:false */
+/*jslint white: true vars: true browser: true todo: true */
 /*global jQuery:true $:true */
 
-/* jQuery UI Slider Button 1.2.1
+/* jQuery UI Slider Button 1.2.2
  * http://github.com/j-ulrich/jquery-sliderbutton
  *
  * Copyright (c) 2013 Jochen Ulrich <jochenulrich@t-online.de>
