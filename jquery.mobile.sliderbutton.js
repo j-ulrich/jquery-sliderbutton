@@ -1,17 +1,45 @@
-/*
- * jQuery Mobile Slider Button 1.0
+/*jshint camelcase:true, plusplus:true, forin:true, noarg:true, noempty:true, eqeqeq:true, bitwise:true, strict:true, undef:true, unused:true, curly:true, browser:true, devel:true, maxerr:100, white:false, onevar:false */
+/*jslint white: true vars: true browser: true todo: true */
+/*global jQuery:true $:true */
+
+/* jQuery Mobile Slider Button 1.3.0
  * http://github.com/j-ulrich/jquery-sliderbutton
  *
- * Copyright (c) 2012 Jochen Ulrich <jochenulrich@t-online.de>
+ * Copyright (c) 2013 Jochen Ulrich <jochenulrich@t-online.de>
  * Licensed under the MIT license (MIT-LICENSE.txt).
  */
 
+/**
+ * @file jQuery Mobile Slider Button
+ * @version 1.1
+ * @copyright 2012 Jochen Ulrich
+ * @license MIT (MIT-LICENSE.txt)
+ */
+
 (function($) {
-	$.widget("mobile.sliderbutton", {
+	"use strict";
+
+	/**
+	 * Constructs a mobile sliderbutton.
+	 * @name sliderbutton
+	 * @public
+	 * @function
+	 * @memberOf jQuery.ju
+	 */
+	$.widget("ju.sliderbutton",
+	
+	/**
+	 * @lends jQuery.ju.sliderbutton.prototype
+	 */
+	{
 		
 		// Options
+		/**
+		 * Default values of the options.
+		 * @since 1.0
+		 */
 		options: {
-			text: "slide to unlock",
+			text: "unlock",
 			disabled: false,
 			mini: false,
 			direction: "right",
@@ -21,24 +49,29 @@
 			}
 		},
 		
+		/**
+		 * Constructor for mobile sliderbuttons.
+		 * @private
+		 * @author julrich
+		 * @since 1.0
+		 */
 		_create: function() {
 			var self = this;
 			
 			self.element.empty();
-			self.element.addClass("ui-sliderbutton");
+			self.element.addClass("ju-sliderbutton");
+			
 			var startValue = 0;
 			if (self.options.direction === "left") {
-				self.element.addClass("ui-sliderbutton-left");
 				startValue = 100;
 			}
-			var text = $('<span></span>').addClass("ui-sliderbutton-text").text(self.options.text);
-			var slider = $('<input></input>').addClass("ui-sliderbutton-input")
+			
+			var text = $('<span></span>').addClass("ju-sliderbutton-text").text(self.options.text);
+			var slider = $('<input></input>').addClass("ju-sliderbutton-input")
 				.attr("min",0).attr("max",100).attr("step",1).attr("value",startValue);
 			self.element.append(text);
 			self.element.append(slider);
-			slider.slider({
-				mini: self.options.mini
-			});
+			slider.slider();
 			var handle = self.element.find('.ui-slider-handle');
 			handle.attr("title","");
 			
@@ -47,58 +80,81 @@
 				handle: handle,
 				text: text,
 				dragging: false, // Used to determine whether we have to pay attention to global vmouseup events
-				activated: false, // Prevents multiple activations for the same slide
-				resetting: false // Prevents infinite recursion when resetting
+				tryingToDrag: false,
+				lastVal: 0, // Remember last value to prevent triggering "slide" multiple times for the same value
+				activated: false // Prevents multiple activations for the same slide
 			});
 
-			slider.bind("change", function(event) {
-				self.handle.attr("title","");
-				var value = slider.val();
-				
-				if ( (self.options.direction === "right" && value === 0) || (self.options.direction === "left" && value === 100) ) {
-					// Resetting is finished
-					self.resetting = false;
-				}
-				if ( self.options.disabled || self.element.attr('disabled') ) {
-//					self.disable();
-					self._resetSlider();
-					return false;
-				}
+			self._setOption("mini", self.options.mini);
+			self._setOption("direction", self.options.direction);
+			self._setOption("disabled", self.options.disabled);
 
-				var allowed = self._trigger("slide", event, {value: value});
-				if (allowed !== false) {
-					self.text.css("opacity",self.options.opacity((self.options.direction === "left"?(100-value):value)));
-					if ( (self.activated === false) && ((self.options.direction === "right" && value >= (100-self.options.tolerance))
-							|| (self.options.direction === "left" && value <= (0+self.options.tolerance))) ) {
-						self._trigger("activate", event, {value: value});
-						self.activated = true;
-					}
-				}
-				else {
+			// Disable key control
+			handle.add(self.element).unbind("keyup").unbind("keydown");
+			
+			handle.add(document).bind("vmousemove", function(event) {
+				if (self.tryingToDrag && (self.options.disabled || self.element.attr('disabled'))) {
 					self._resetSlider();
 				}
-				return allowed;
+				if (self.dragging) {
+					self.handle.attr("title","");
+					var value = Math.round(handle.position().left / handle.parent().width() * 100);
+
+					if (value === self.lastVal) {
+						return true;
+					}
+					self.lastVal = value;
+					
+					var allowed = self._trigger("slide", null, {value: value});
+					if (allowed !== false) {
+						self.text.css("opacity",self.options.opacity((self.options.direction === "left"?(100-value):value)));
+						if ( (self.activated === false) && ((self.options.direction === "right" && value >= (100-self.options.tolerance)) ||
+								(self.options.direction === "left" && value <= (0+self.options.tolerance))) ) {
+							self._trigger("activate");
+							self.activated = true;
+						}
+					}
+					else {
+						self._resetSlider();
+					}
+					return allowed;
+				}
 			});
 			
 			handle.bind("vmousedown", function(event) {
-				self.dragging = true;
-				self.resetting = false;
-				self.activated = false;
-				self._trigger("start", event, self.element);
+				self.tryingToDrag = true;
+				if (!self.dragging && !self.options.disabled && !self.element.attr('disabled')) {
+					var allowed = self._trigger("start");
+					if (allowed !== false) {
+						self.dragging = true;
+						self.activated = false;
+					}
+					return allowed;
+				}
 			});
 			handle.add(document).bind("vmouseup", function(event) {
+				self.tryingToDrag = false;
 				if (self.dragging) {
-					var allowed = self._trigger("stop", event, self.element);
+					var allowed = self._trigger("stop");
 					if (allowed !== false) {
 						self._reset("fast");
 					}
 					self.dragging = false;
+					return allowed;
+				} else {
+					self._resetSlider();
 				}
 			});
 			
 			
 		},
 		
+		/**
+		 * Forces the slider handle into idle position.
+		 * @private
+		 * @author julrich
+		 * @since 1.0
+		 */
 		_resetSlider: function() {
 			var self = this;
 			
@@ -109,42 +165,56 @@
 			else if (self.options.direction === "left") {
 				self.handle.css("left", "100%");
 			}
-			if (self.resetting) {
-				return; // Prevent infinite recursion
-			}
-			self.resetting = true;
 			self.activated = false;
 			if (self.options.direction === "right") {
 				self.slider.val(0);
+				self.lastVal = 0;
 			}
 			else if (self.options.direction === "left") {
 				self.slider.val(100);
+				self.lastVal = 100;
 			}
-			self.slider.slider("refresh");
 		},
 		
+		/**
+		 * Resets the slider, ensuring that the handle moves into/is in idle position.
+		 * @param {Numeric|String|Null} animationDuration - If given and not <code>null</code>,
+		 * the resetting is performed asynchronously using jQuery's <code>.animate()</code> function.
+		 * <i>animationDuration</i> then defines the duration of the animation. If not given or
+		 * <code>null</code>, the resetting is performed instantly.
+		 * @private
+		 * @author julrich
+		 * @since 1.0
+		 */
 		_reset: function(animationDuration) {
 			var self = this;
+
+			var resetValue;
+			if (self.options.direction === "right") {
+				resetValue = 0;
+			}
+			else if (self.options.direction === "left") {
+				resetValue = 100;
+			}
+
 			if (animationDuration === undefined || animationDuration === null) {
-				if (self.options.direction === "right") {
-					self.handle.css("left", 0);
-				}
-				else if (self.options.direction === "left") {
-					self.handle.css("left", "100%");
-				}
+				self._resetSlider();
 				self.text.css("opacity",self.options.opacity(0));
 			}
 			else {
-				if (self.options.direction === "right") {
-					self.handle.animate({left: 0}, animationDuration, $.proxy(self._resetSlider, self));
-				}
-				else if (self.options.direction === "left") {
-					self.handle.animate({left: "100%"}, animationDuration, $.proxy(self._resetSlider, self));
-				}
+				self.handle.animate({left: resetValue+"%"}, animationDuration, $.proxy(self._resetSlider, self));
 				self.text.animate({opacity: self.options.opacity(0)}, animationDuration);
 			}
 		},
 		
+		/**
+		 * Changes an option.
+		 * @param {String} option - name of the option to be set.
+		 * @param value - new value for the option.
+		 * @private
+		 * @author julrich
+		 * @since 1.0
+		 */
 		_setOption: function(option, value) {
 			var self = this;
 			$.Widget.prototype._setOption.apply( self, arguments );
@@ -154,33 +224,36 @@
 				self.text.text(value);
 				break;
 			case "mini":
-				self.element.toggleClass("ui-sliderbutton-mini",value);
-				self.slider.slider({mini: value}).slider("refresh");
+				self.element.toggleClass("ju-sliderbutton-mini",value);
+				self.slider.slider("option", "mini", value).slider("refresh");
 				break;
 			case "disabled":
 				if (value === true) {
-					self.element.addClass("ui-disabled");
+					self.element.addClass("ui-disabled ui-state-disabled");
 					self.element.attr("disabled", true);
+					self.element.attr("aria-disabled", true);
 					self.text.css("opacity","");
+					self._resetSlider();
 				}
 				else if (value === false) {
-					self.element.removeClass("ui-disabled");
+					self.element.removeClass("ui-disabled ui-state-disabled");
 					self.element.attr("disabled", false);
+					self.element.attr("aria-disabled", false);
 				}
 				break;
 			case "direction":
 				if (value === "right") {
-					self.element.removeClass("ui-sliderbutton-left");
+					self.element.removeClass("ju-sliderbutton-left");
 				}
 				else if (value === "left") {
-					self.element.addClass("ui-sliderbutton-left");
+					self.element.addClass("ju-sliderbutton-left");
 				}
 				self._resetSlider();
 				break;
 			default:
 				break;
 			}
-		},
+		}
 
 	});
 	
