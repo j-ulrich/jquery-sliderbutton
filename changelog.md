@@ -1,6 +1,10 @@
 jQuery UI/Mobile Sliderbutton Changelog
 =======================================
 
+Version 1.3.0 - (Released: 2013-02-12)
+-------------
+* Changes the design of the sliderbutton
+
 Version 1.2.2 - (Released: 2013-01-30)
 -------------
 * Fixes the jQuery package manifest.

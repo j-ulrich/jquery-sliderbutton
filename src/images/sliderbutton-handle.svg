@@ -236,9 +236,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.959798"
-     inkscape:cx="-4.9677534"
-     inkscape:cy="-9.5084352"
+     inkscape:zoom="7.919596"
+     inkscape:cx="32.858284"
+     inkscape:cy="26.531886"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -263,7 +263,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -280,16 +280,7 @@
        x="0"
        y="1002.3622"
        ry="16"
-       rx="16" />
-    <rect
-       style="fill:url(#linearGradient5244);fill-opacity:1;fill-rule:nonzero;stroke:#484848;stroke-width:0.98314202;stroke-miterlimit:4;stroke-opacity:0.47104247;stroke-dasharray:none"
-       id="rect2989-1"
-       width="69.016853"
-       height="49.016857"
-       x="0.49180567"
-       y="1002.8538"
-       ry="15.685395"
-       rx="15.775279" />
+       rx="0" />
     <path
        style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#f4f4f4;fill-opacity:1;stroke:url(#linearGradient5434);stroke-width:0.4957487;stroke-miterlimit:4;stroke-opacity:0.47104247;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
        d="m 15.451817,1008.6241 a 3.574861,3.5646413 0 0 0 -2.482293,6.126 l 12.349413,12.3451 -12.349413,12.3141 a 3.574861,3.5646413 0 1 0 5.026645,5.0432 l 14.893765,-14.8512 a 3.574861,3.5646413 0 0 0 0,-5.0431 L 17.996169,1009.707 a 3.574861,3.5646413 0 0 0 -2.544352,-1.0829 z"

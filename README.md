@@ -1,4 +1,4 @@
-jQuery UI/Mobile Sliderbutton 1.2.2
+jQuery UI/Mobile Sliderbutton 1.3.0
 ===================================
 
 The sliderbutton plugin provides a button which is triggered by sliding a handle to the side. This
@@ -57,7 +57,7 @@ Live demos can be found at jsFiddle and JS Bin where you can also play around wi
 Options
 -------
 * __disabled__ _{Boolean}_: Disables (`true`) or enables (`false`) the sliderbutton. Default: `false`
-* __text__ _{String}_: The text appearing on the slider lane. Default: `"slide to unlock"`
+* __text__ _{String}_: The text appearing on the slider lane. Default: `"unlock"`
 * __tolerance__ _{Numeric}_: Defines the distance from the end of the slider lane where the button is triggered
 	(activated). Must be in the range [0,100] where 0 means no tolerance (i.e. the slider needs to be
 	moved entirely to the end before the button is triggered) and 100 means maximum tolerance (i.e. the
