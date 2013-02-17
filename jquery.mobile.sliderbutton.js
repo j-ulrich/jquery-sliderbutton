@@ -2,7 +2,7 @@
 /*jslint white: true vars: true browser: true todo: true */
 /*global jQuery:true $:true */
 
-/* jQuery Mobile Slider Button 1.3.0
+/* jQuery Mobile Slider Button 1.3.1
  * http://github.com/j-ulrich/jquery-sliderbutton
  *
  * Copyright (c) 2013 Jochen Ulrich <jochenulrich@t-online.de>
@@ -39,7 +39,7 @@
 		 * @since 1.0
 		 */
 		options: {
-			text: "unlock",
+			text: "activate",
 			disabled: false,
 			mini: false,
 			direction: "right",
