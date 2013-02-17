@@ -1,4 +1,4 @@
-jQuery UI/Mobile Sliderbutton 1.3.0
+jQuery UI/Mobile Sliderbutton 1.3.1
 ===================================
 
 The sliderbutton plugin provides a button which is triggered by sliding a handle to the side. This
@@ -57,7 +57,7 @@ Live demos can be found at jsFiddle and JS Bin where you can also play around wi
 Options
 -------
 * __disabled__ _{Boolean}_: Disables (`true`) or enables (`false`) the sliderbutton. Default: `false`
-* __text__ _{String}_: The text appearing on the slider lane. Default: `"unlock"`
+* __text__ _{String}_: The text appearing on the slider lane. Default: `"activate"`
 * __tolerance__ _{Numeric}_: Defines the distance from the end of the slider lane where the button is triggered
 	(activated). Must be in the range [0,100] where 0 means no tolerance (i.e. the slider needs to be
 	moved entirely to the end before the button is triggered) and 100 means maximum tolerance (i.e. the
@@ -128,8 +128,14 @@ does not change.
 
 Licensing
 ---------
-Copyright &copy; 2012 Jochen Ulrich
+Copyright &copy; 2013 Jochen Ulrich
 http://github.com/j-ulrich/jquery-sliderbutton
 
 Licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+Legal Note
+----------
+Note that Apple Inc. holds the [U.S. Patent 8,286,103](http://patft.uspto.gov/netacgi/nph-Parser?Sect1=PTO1&Sect2=HITOFF&d=PALL&p=1&u=%2Fnetahtml%2FPTO%2Fsrchnum.htm&r=1&f=G&l=50&s1=8,286,103.PN.&OS=PN/8,286,103&RS=PN/8,286,103)
+which covers unlocking a touch-sensitive device via predefined gestures. In other words: don't use the
+sliderbutton to unlock devices unless you own a license from Apple.
 

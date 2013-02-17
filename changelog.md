@@ -1,6 +1,12 @@
 jQuery UI/Mobile Sliderbutton Changelog
 =======================================
 
+Version 1.3.1 - (Released: 2013-02-17)
+-------------
+* Changes default text to "activate".
+* Adds a legal note in the documentation.
+* Minor changes in the package files.
+
 Version 1.3.0 - (Released: 2013-02-12)
 -------------
 * Changes the design of the sliderbutton
