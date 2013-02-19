@@ -20,6 +20,7 @@ generated markup and CSS differs.
 - [Requirements](#requirements)
 - [Compatibility](#compatibility)
 - [Licensing](#licensing)
+- [Legal Note](#legal-note)
 
 
 Initialization & Usage
