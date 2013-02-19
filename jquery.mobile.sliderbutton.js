@@ -2,7 +2,7 @@
 /*jslint white: true vars: true browser: true todo: true */
 /*global jQuery:true $:true */
 
-/* jQuery Mobile Slider Button 1.3.1
+/* jQuery Mobile Slider Button 1.3.2
  * http://github.com/j-ulrich/jquery-sliderbutton
  *
  * Copyright (c) 2013 Jochen Ulrich <jochenulrich@t-online.de>
