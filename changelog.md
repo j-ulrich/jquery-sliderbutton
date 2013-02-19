@@ -1,6 +1,10 @@
 jQuery UI/Mobile Sliderbutton Changelog
 =======================================
 
+Version 1.3.2 - (Released: 2013-02-19)
+-------------
+* Removes the background of the handle from the SVG to allow changing it using CSS.
+
 Version 1.3.1 - (Released: 2013-02-17)
 -------------
 * Changes default text to "activate".
