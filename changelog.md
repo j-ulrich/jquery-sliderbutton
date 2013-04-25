@@ -1,6 +1,10 @@
 jQuery UI/Mobile Sliderbutton Changelog
 =======================================
 
+Version 2.0.1 - (Released: 2013-04-25)
+-------------
+* Fixes the broken Version 2.0.0 by removing merge obstacles.
+
 Version 2.0.0 - (Released: 2013-04-25)
 -------------
 * Adds the "releaseToActivate" option which is enabled by default.

@@ -2,11 +2,7 @@
 /*jshint camelcase:true, plusplus:true, forin:true, noarg:true, noempty:true, eqeqeq:true, bitwise:true, strict:true, undef:true, unused:true, curly:true, browser:true, devel:true, maxerr:100, white:false, onevar:false */
 /*global jQuery:true $:true */
 
-<<<<<<< HEAD
-/* jQuery UI Slider Button 2.0.0
-=======
-/* jQuery UI Slider Button 1.3.2
->>>>>>> branch 'master' of https://github.com/j-ulrich/jquery-sliderbutton.git
+/* jQuery UI Slider Button 2.0.1
  * http://github.com/j-ulrich/jquery-sliderbutton
  *
  * Copyright (c) 2013 Jochen Ulrich <jochenulrich@t-online.de>
