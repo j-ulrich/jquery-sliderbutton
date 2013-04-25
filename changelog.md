@@ -12,6 +12,10 @@ Version 2.0.0 - (Released: 2013-04-25)
   I just added a note to the affected versions in this changelog and will respect
   the semantic versioning more strictly in the future.
 
+Version 1.3.2 - (Released: 2013-02-19)
+-------------
+* Removes the background of the handle from the SVG to allow changing it using CSS.
+
 Version 1.3.1 - (Released: 2013-02-17)
 -------------
 **Note:** Version 1.3.1 contains breaking changes (change in the default values)

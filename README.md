@@ -20,6 +20,7 @@ generated markup and CSS differs.
 - [Requirements](#requirements)
 - [Compatibility](#compatibility)
 - [Licensing](#licensing)
+- [Legal Note](#legal-note)
 
 
 Initialization & Usage
@@ -49,10 +50,10 @@ demonstration of most of the features of both versions of the sliderbutton plugi
 Live demos can be found at jsFiddle and JS Bin where you can also play around with the plugin:
 * UI:
 	- http://jsfiddle.net/Ignitor/SmZEr/embedded/result/ ([jsFiddle](http://jsfiddle.net/Ignitor/SmZEr/))
-	- http://jsbin.com/eqasew/latest/edit#live ([JS Bin](http://jsbin.com/eqasew/latest/edit))
+	- http://jsbin.com/eqasew/6/edit#live ([JS Bin](http://jsbin.com/eqasew/6/edit))
 * Mobile:
 	- http://jsfiddle.net/Ignitor/VY5FC/embedded/result/ ([jsFiddle](http://jsfiddle.net/Ignitor/VY5FC/))
-	- http://jsbin.com/igovef/latest/edit#live ([JS Bin](http://jsbin.com/igovef/latest/edit))
+	- http://jsbin.com/igovef/10/edit#live ([JS Bin](http://jsbin.com/igovef/10/edit))
 
 Options
 -------

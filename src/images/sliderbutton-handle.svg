@@ -15,7 +15,7 @@
    height="50"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.2 r9819"
+   inkscape:version="0.48.3.1 r9886"
    sodipodi:docname="sliderbutton-handle.svg">
   <defs
      id="defs4">
@@ -242,8 +242,8 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="962"
+     inkscape:window-width="1600"
+     inkscape:window-height="838"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1">
@@ -272,15 +272,6 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-1002.3622)">
-    <rect
-       style="fill:#babdb6;stroke:none"
-       id="rect2989"
-       width="70"
-       height="50"
-       x="0"
-       y="1002.3622"
-       ry="16"
-       rx="0" />
     <path
        style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#f4f4f4;fill-opacity:1;stroke:url(#linearGradient5434);stroke-width:0.4957487;stroke-miterlimit:4;stroke-opacity:0.47104247;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
        d="m 15.451817,1008.6241 a 3.574861,3.5646413 0 0 0 -2.482293,6.126 l 12.349413,12.3451 -12.349413,12.3141 a 3.574861,3.5646413 0 1 0 5.026645,5.0432 l 14.893765,-14.8512 a 3.574861,3.5646413 0 0 0 0,-5.0431 L 17.996169,1009.707 a 3.574861,3.5646413 0 0 0 -2.544352,-1.0829 z"
