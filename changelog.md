@@ -7,6 +7,8 @@ Version 2.0.1 - (Released: 2013-04-25)
 
 Version 2.0.0 - (Released: 2013-04-25)
 -------------
+**Note:** This version is broken due to merge leftovers ("<<<< HEAD" etc.). Use 2.0.1 instead!
+
 * Adds the "releaseToActivate" option which is enabled by default.
 * Reconsidered the versioning scheme and according to semantic versioning,
   Version 1.3.0 should have already been version 2.0.0 since it totally changed
