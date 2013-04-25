@@ -2,7 +2,11 @@
 /*jshint camelcase:true, plusplus:true, forin:true, noarg:true, noempty:true, eqeqeq:true, bitwise:true, strict:true, undef:true, unused:true, curly:true, browser:true, devel:true, maxerr:100, white:false, onevar:false */
 /*global jQuery:true $:true */
 
+<<<<<<< HEAD
+/* jQuery UI Slider Button 2.0.0
+=======
 /* jQuery UI Slider Button 1.3.2
+>>>>>>> branch 'master' of https://github.com/j-ulrich/jquery-sliderbutton.git
  * http://github.com/j-ulrich/jquery-sliderbutton
  *
  * Copyright (c) 2013 Jochen Ulrich <jochenulrich@t-online.de>
@@ -11,8 +15,8 @@
 
 /**
  * @file jQuery UI Slider Button
- * @version 1.1
- * @copyright 2012 Jochen Ulrich
+ * @version 2.0.0
+ * @copyright 2013 Jochen Ulrich
  * @license MIT (MIT-LICENSE.txt)
  */
 
@@ -42,8 +46,31 @@
 			text: "activate",
 			direction: "right",
 			tolerance: 1,
+			releaseToActivate: true,
 			opacity: function(value) {
 				return 1.0-(value/50.0);
+			}
+		},
+		
+		/**
+		 * Checks if the slider is in the position for an activation and
+		 * if it is, triggers the "activate" event.
+		 * @param {Object} event - The event object provided by the event callbacks
+		 * of the jQuery UI Slider (e.g. start, stop, etc.). 
+		 * @param {Object} ui - The ui object provided by the event callbacks
+		 * of the jQuery UI Slider (e.g. start, stop, etc.). Needs to provide
+		 * the current value of the slider as the property "value".
+		 * @private
+		 * @author julrich
+		 * @since 2.0.0
+		 */
+		_checkSliderPosAndActivate: function(event, ui) {
+			var self = this;
+			if ( (self.activated === false)
+					&& ((self.options.direction === "right" && ui.value >= (100-self.options.tolerance))
+					||	(self.options.direction === "left" && ui.value <= (0+self.options.tolerance))) ) {
+				self._trigger("activate", event, ui);
+				self.activated = true;
 			}
 		},
 		
@@ -89,20 +116,18 @@
 					var allowed = self._trigger("slide", event, ui);
 					if (allowed !== false) {
 						self.text.css("opacity",self.options.opacity((self.options.direction === "left"?(100-ui.value):ui.value)));
-						if ( (self.activated === false) && ((self.options.direction === "right" && ui.value >= (100-self.options.tolerance)) ||
-								(self.options.direction === "left" && ui.value <= (0+self.options.tolerance))) ) {
-							self._trigger("activate", event, ui);
-							self.activated = true;
+						if (self.options.releaseToActivate === false) {
+							self._checkSliderPosAndActivate(event, ui);
 						}
 					}
 					return allowed;
 				},
 				stop: function(event, ui) {
-					var allowed = self._trigger("stop", event, ui);
-					if (allowed !== false) {
-						self._reset("fast");
+					if (self.options.releaseToActivate !== false) {
+						self._checkSliderPosAndActivate(event, ui);
 					}
-					return allowed;
+					self._trigger("stop", event, ui);
+					self._reset("fast");
 				},
 				start: function(event, ui) {
 					return self._trigger("start", event, ui);
@@ -113,7 +138,7 @@
 		
 		/**
 		 * Resets the slider, ensuring that the handle moves into/is in idle position.
-		 * @param {Numeric|String|Null} animationDuration - If given and not <code>null</code>,
+		 * @param {Numeric|String|Null} [animationDuration] - If given and not <code>null</code>,
 		 * the resetting is performed asynchronously using jQuery's <code>.animate()</code> function.
 		 * <i>animationDuration</i> then defines the duration of the animation. If not given or
 		 * <code>null</code>, the resetting is performed instantly.

@@ -1,8 +1,12 @@
-/*jshint camelcase:true, plusplus:true, forin:true, noarg:true, noempty:true, eqeqeq:true, bitwise:true, strict:true, undef:true, unused:true, curly:true, browser:true, devel:true, maxerr:100, white:false, onevar:false */
 /*jslint white: true vars: true browser: true todo: true */
+/*jshint camelcase:true, plusplus:true, forin:true, noarg:true, noempty:true, eqeqeq:true, bitwise:true, strict:true, undef:true, unused:true, curly:true, browser:true, devel:true, maxerr:100, white:false, onevar:false */
 /*global jQuery:true $:true */
 
+<<<<<<< HEAD
+/* jQuery Mobile Slider Button 2.0.0
+=======
 /* jQuery Mobile Slider Button 1.3.2
+>>>>>>> branch 'master' of https://github.com/j-ulrich/jquery-sliderbutton.git
  * http://github.com/j-ulrich/jquery-sliderbutton
  *
  * Copyright (c) 2013 Jochen Ulrich <jochenulrich@t-online.de>
@@ -11,8 +15,8 @@
 
 /**
  * @file jQuery Mobile Slider Button
- * @version 1.1
- * @copyright 2012 Jochen Ulrich
+ * @version 2.0.0
+ * @copyright 2013 Jochen Ulrich
  * @license MIT (MIT-LICENSE.txt)
  */
 
@@ -44,11 +48,42 @@
 			mini: false,
 			direction: "right",
 			tolerance: 5,
+			releaseToActivate: true,
 			opacity: function(value) {
 				return 1.0-(value/50.0);
 			}
 		},
 		
+		/**
+		 * Calculates the current value (i.e. position) of the slider.
+		 * @returns {Number} The current value of the slider in the range 0-100
+		 * @private
+		 * @author julrich
+		 * @since 2.0.0.
+		 */
+		_value: function() {
+			var self = this;
+			return Math.round(self.handle.position().left / self.handle.parent().width() * 100);
+		},
+		
+		/**
+		 * Checks if the slider is in the position for an activation and
+		 * if it is, triggers the "activate" event.
+		 * @private
+		 * @author julrich
+		 * @since 2.0.0
+		 */
+		_checkSliderPosAndActivate: function() {
+			var self = this,
+				value = self._value();
+			if ( (self.activated === false)
+					&& ((self.options.direction === "right" && value >= (100-self.options.tolerance))
+					||	(self.options.direction === "left" && value <= (0+self.options.tolerance))) ) {
+				self._trigger("activate", null, {value: value});
+				self.activated = true;
+			}
+		},
+
 		/**
 		 * Constructor for mobile sliderbuttons.
 		 * @private
@@ -98,8 +133,9 @@
 				}
 				if (self.dragging) {
 					self.handle.attr("title","");
-					var value = Math.round(handle.position().left / handle.parent().width() * 100);
+					var value = self._value();
 
+					// Prevent triggering "slide" again if the value didn't change
 					if (value === self.lastVal) {
 						return true;
 					}
@@ -108,10 +144,8 @@
 					var allowed = self._trigger("slide", null, {value: value});
 					if (allowed !== false) {
 						self.text.css("opacity",self.options.opacity((self.options.direction === "left"?(100-value):value)));
-						if ( (self.activated === false) && ((self.options.direction === "right" && value >= (100-self.options.tolerance)) ||
-								(self.options.direction === "left" && value <= (0+self.options.tolerance))) ) {
-							self._trigger("activate");
-							self.activated = true;
+						if (self.options.releaseToActivate === false) {
+							self._checkSliderPosAndActivate();
 						}
 					}
 					else {
@@ -124,7 +158,7 @@
 			handle.bind("vmousedown", function(event) {
 				self.tryingToDrag = true;
 				if (!self.dragging && !self.options.disabled && !self.element.attr('disabled')) {
-					var allowed = self._trigger("start");
+					var allowed = self._trigger("start", null, {value: self._value()});
 					if (allowed !== false) {
 						self.dragging = true;
 						self.activated = false;
@@ -135,12 +169,12 @@
 			handle.add(document).bind("vmouseup", function(event) {
 				self.tryingToDrag = false;
 				if (self.dragging) {
-					var allowed = self._trigger("stop");
-					if (allowed !== false) {
-						self._reset("fast");
+					if (self.options.releaseToActivate !== false) {
+						self._checkSliderPosAndActivate();
 					}
+					self._trigger("stop", null, {value: self._value()});
+					self._reset("fast");
 					self.dragging = false;
-					return allowed;
 				} else {
 					self._resetSlider();
 				}
@@ -178,7 +212,7 @@
 		
 		/**
 		 * Resets the slider, ensuring that the handle moves into/is in idle position.
-		 * @param {Numeric|String|Null} animationDuration - If given and not <code>null</code>,
+		 * @param {Numeric|String|Null} [animationDuration] - If given and not <code>null</code>,
 		 * the resetting is performed asynchronously using jQuery's <code>.animate()</code> function.
 		 * <i>animationDuration</i> then defines the duration of the animation. If not given or
 		 * <code>null</code>, the resetting is performed instantly.
