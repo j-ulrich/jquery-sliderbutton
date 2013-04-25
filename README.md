@@ -1,4 +1,4 @@
-jQuery UI/Mobile Sliderbutton 1.3.1
+jQuery UI/Mobile Sliderbutton 2.0.0
 ===================================
 
 The sliderbutton plugin provides a button which is triggered by sliding a handle to the side. This
@@ -65,10 +65,13 @@ Options
 	version and `5` for the mobile version.
 * __direction__ _{"right"|"left"}_: Defines the direction in which the slider needs to be moved.
 	Default: `"right"`
+* __releaseToActivate__ _{Boolean}_: If `true`, the slider must be released (i.e. the mouse button or 
+	finger must be release) while the slider is at the end of the lane for the button to be activated.
+	Default: `true`
 * __opacity__ _{Function}_: Can be used to customize how the opacity of the text is changed. The function
 	is handed one parameter, the current value in the range [0,100] where 0 means the slider is at
 	the start (idle position) and 100 means the slider it at the end (activated). The provided function
-	then has to return a value for the opacity of the text. The default is
+	has to return a value for the opacity of the text. The default is
 	`function(value) { return 1.0-(value/(100.0/2.0)); }` which means a linear fade out where the
 	text becomes invisible in the middle of the lane.
 * __mini__ _{Boolean}_: **Mobile version only.** Creates a mini version of the sliderbutton. Default: `false`
@@ -80,8 +83,10 @@ Events
 	the arguments `event` and `ui` where `ui.value` is the current value (position) of the handle
 	in the range [0,100]. 0 means the slider is at the start (idle position) and 100 means the
 	slider is at the end (activated). 
-* __activate__ _{sliderbuttonactivate}_: Triggered when the slider handle reaches the "end" (taking the
-	tolerance into account).
+* __activate__ _{sliderbuttonactivate}_: If `releaseToActivate` is `false`, this event is triggered
+	when the slider handle reaches the "end" (taking the tolerance into account).
+	If `releaseToActivate` is `true` (the default), the event is triggered when the slider handle is
+	at the "end" and the slider handle is released. This event is always triggered _before_ the `stop` event.
 * __start__ _{sliderbuttonstart}_: Triggered when the slider handle starts to move.
 * __stop__ _{sliderbuttonstop}_: Triggered when the slider handle is released and starts to slide back
 	into its idle position.

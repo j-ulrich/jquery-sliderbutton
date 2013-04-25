@@ -52,6 +52,10 @@
 			Disabled:
 			<div id="disabled"></div>
 		</div>
+		<div class="container">
+			Immediate activate:
+			<div id="noReleaseToActivate"></div>
+		</div>
 	</body>
 	<script type="text/javascript">
 	function logActivated() {
@@ -90,6 +94,11 @@
 	
 	$('#disabled').sliderbutton({
 		disabled: true,
+		activate: logActivated
+	});
+	
+	$('#noReleaseToActivate').sliderbutton({
+		releaseToActivate: false,
 		activate: logActivated
 	});
 	</script>

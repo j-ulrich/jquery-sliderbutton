@@ -57,6 +57,10 @@
 			Mini:
 			<div id="mini"></div>
 		</div>
+		<div class="container">
+			Immediate activate:
+			<div id="noReleaseToActivate"></div>
+		</div>
 	</body>
 	<script type="text/javascript">
 	function logActivated() {
@@ -105,6 +109,11 @@
 	
 	$('#mini').sliderbutton({
 		mini: true,
+		activate: logActivated
+	});
+
+	$('#noReleaseToActivate').sliderbutton({
+		releaseToActivate: false,
 		activate: logActivated
 	});
 	</script>

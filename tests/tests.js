@@ -7,13 +7,27 @@
 
 $(document).ready(function() {
 	
+	var sliderbuttonVariant = $('#jquery-sliderbutton-variant').val();
+	
+	if (sliderbuttonVariant !== 'mobile' && sliderbuttonVariant !== 'ui') {
+		test("Determine test set to be run", function() {
+			ok(false, 'Invalid value for "sliderbuttonVariant". Cannot determine which tests to run.');
+		});
+		return;
+	}
+	
 	test("basic markup expansion", function() {
 		var testElement = $('#sliderbuttontest');
 		testElement.sliderbutton();
 		ok(testElement.hasClass("ju-sliderbutton"), 'Verify the expansion worked at all');
 		
 		var children = testElement.children();
-		strictEqual(children.length, 3, 'Verify the slider, the (hidden) input and the text have been created');
+		if (sliderbuttonVariant === 'mobile') {
+			strictEqual(children.length, 3, 'Verify the slider, the (hidden) input and the text have been created');
+		}
+		else {
+			strictEqual(children.length, 2, 'Verify the slider and the text have been created');
+		}
 		ok(children.first().hasClass("ju-sliderbutton-text"), 'Verify the text has been created');
 		ok(children.last().hasClass("ui-slider"), 'Verify the slider has been created');
 		var handles = children.last().children(".ui-slider-handle");
@@ -45,7 +59,7 @@ $(document).ready(function() {
 	});
 	
 	//####### Option Tests #######
-	module('option tests');
+	module('static option tests');
 	test("custom text", function() {
 		var testElement = $('#sliderbuttontest');
 		testElement.sliderbutton({text: "test text"});
@@ -73,7 +87,7 @@ $(document).ready(function() {
 		handle.simulate("drop");
 	});
 	
-	test("disabled", function() {
+	test("disable", function() {
 		var testElement = $('#sliderbuttontest');
 		testElement.sliderbutton({disabled: true});
 
@@ -103,14 +117,16 @@ $(document).ready(function() {
 		expect(2); // The drag'n'drop should not trigger anything
 	});
 	
-	test("mini", function() {
-		var testElement = $('#sliderbuttontest');
-		testElement.sliderbutton({mini: true});
+	if (sliderbuttonVariant === 'mobile') {
+		test("mini", function() {
+			var testElement = $('#sliderbuttontest');
+			testElement.sliderbutton({mini: true});
 
-		ok(testElement.hasClass("ju-sliderbutton-mini"), 'Verify mini class is set');
-		strictEqual(testElement.css("height"), "28px", 'Verifiy the mini element has the correct height');
-		strictEqual(testElement.find(".ju-sliderbutton-text").css("font-size"), "14px", 'Verify the text hast the correct font size');
-	});
+			ok(testElement.hasClass("ju-sliderbutton-mini"), 'Verify mini class is set');
+			strictEqual(testElement.css("height"), "28px", 'Verifiy the mini element has the correct height');
+			strictEqual(testElement.find(".ju-sliderbutton-text").css("font-size"), "14px", 'Verify the text hast the correct font size');
+		});
+	}
 	
 	//####### Event Tests #######
 	module('event tests', {
@@ -217,11 +233,11 @@ $(document).ready(function() {
 		}
 		
 		$('#qunit-fixture').on('sliderbuttoncreate', '.ju-sliderbutton', function() {
-			assertExpectedEvent("create");
+			assertExpectedEvent('create');
 		});
 
 		$('#qunit-fixture').on('sliderbuttonstart', '.ju-sliderbutton', function() {
-			assertExpectedEvent("start");
+			assertExpectedEvent('start');
 		});
 
 		$('#qunit-fixture').on('sliderbuttonslide', '.ju-sliderbutton', function(event, ui) {
@@ -229,11 +245,11 @@ $(document).ready(function() {
 		});
 
 		$('#qunit-fixture').on('sliderbuttonstop', '.ju-sliderbutton', function() {
-			assertExpectedEvent("stop");
+			assertExpectedEvent('stop');
 		});
 		
 		$('#qunit-fixture').on('sliderbuttonactivate', '.ju-sliderbutton', function() {
-			assertExpectedEvent("activate");
+			assertExpectedEvent('activate');
 		});
 
 
@@ -254,22 +270,25 @@ $(document).ready(function() {
 		expectedEvents.push('stop');
 		handle.simulate("drop");
 		
-		
-		// Trigger start, slide, activate and stop
-		expectedEvents.push('start', 'slide', 'slide', 'activate', 'stop');
+		// Trigger start and slide
+		expectedEvents.push('start', 'slide', 'slide');
 
 		stop(); // We need to wait until the handle is slided back
 		setTimeout(function() {
 			handle.simulate("drag", {dx: dx});
-			handle.simulate("drag", {dx: dx});
+			handle.simulate("drag", {dx: dx}); // Slide to the end
+			
+			// Trigger activate and stop
+			expectedEvents.push('activate', 'stop');
 			handle.simulate("drop");
+			
 			for (; expectedEventsIndex < expectedEvents.length; expectedEventsIndex += 1) {
 				ok(false, "Missing event: "+expectedEvents[expectedEventsIndex]);
 			}
+			
+			expect(expectedEvents.length);
 			start();
 		}, 300);
-
-		expect(expectedEvents.length);
 	});
 
 	test("tolerance", function() {
@@ -285,6 +304,21 @@ $(document).ready(function() {
 		var dx = handle.parent().width() / 2;
 		handle.simulate("drag-n-drop", {dx: dx});
 	});
+	
+	test("disabled releaseToActivate", function() {
+		expect(1);
+		var testElement = $('#sliderbuttontest');
+		testElement.sliderbutton({releaseToActivate: false});
+
+		$('#qunit-fixture').on('sliderbuttonactivate', '.ju-sliderbutton', function() {
+			ok(true, "activate triggered");
+		});
+		
+		var handle = testElement.find('.ui-slider-handle').first();
+		var dx = handle.parent().width();
+		handle.simulate("drag", {dx: dx});
+	});
+
 	
 });
 	
