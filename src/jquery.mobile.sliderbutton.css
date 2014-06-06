@@ -125,17 +125,17 @@
 	display: none;
 }
 
+
 .ju-sliderbutton .ui-slider .ui-slider-track {
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	box-shadow: none;
-	position: relative;
-	overflow: visible;
+	-webkit-box-shadow:none;
+	-moz-box-shadow:none;
+	box-shadow:none;
+	top: 15px;
+	margin: 0;
+	background: none;
 	border: none;
-	height: 15px;
-	margin: 7px 0px 0 45px;
-	top: 6px;
-	background-color: transparent;
-	border-color: transparent;
-	font-weight: 700;
+}
+
+.ju-sliderbutton.ju-sliderbutton-mini .ui-slider .ui-slider-track {
+	top: 9px;
 }
