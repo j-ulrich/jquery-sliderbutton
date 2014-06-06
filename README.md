@@ -1,4 +1,4 @@
-jQuery UI/Mobile Sliderbutton 2.0.1
+jQuery UI/Mobile Sliderbutton 2.0.2
 ===================================
 
 The sliderbutton plugin provides a button which is triggered by sliding a handle to the side. This
@@ -124,12 +124,16 @@ The plugin requires
 
 Compatibility
 ------------
-The UI version of the plugin has been successfully tested with jQuery 1.7.2 and jQuery UI 1.8.20 and
-it should be compatible with future versions as long as the implementation of the jQuery UI slider
-does not change.
+**NOTE: The current UI version of the plugin is NOT compatible with jQuery UI 1.10.0 and above! See also issue [#5](https://github.com/j-ulrich/jquery-sliderbutton/issues/5).**
 
-The mobile version has been successfully tested with jQuery 1.7.2 and jQuery Mobile 1.1.0 and it
-should be compatible with future versions as long as the implementation of the jQuery mobile slider
+The UI version of the plugin has been successfully tested with jQuery 1.7.2 and jQuery UI 1.8.20.
+
+The mobile version has been successfully tested with the following combinations:
+* jQuery 1.7.2 and jQuery Mobile 1.1.0
+* jQuery 1.10.2 and jQuery Mobile 1.3.2 and 1.4.2
+* jQuery 2.1.1 and jQuery Mobile 1.4.2
+
+It should also be compatible with future versions as long as the implementation of the jQuery mobile slider
 does not change.
 
 Licensing

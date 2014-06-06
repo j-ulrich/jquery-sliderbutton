@@ -17,20 +17,18 @@ $(document).ready(function() {
 	}
 	
 	test("basic markup expansion", function() {
-		var testElement = $('#sliderbuttontest');
-		testElement.sliderbutton();
-		ok(testElement.hasClass("ju-sliderbutton"), 'Verify the expansion worked at all');
-		
-		var children = testElement.children();
+		var $testElement = $('#sliderbuttontest');
+		$testElement.sliderbutton();
+		ok($testElement.hasClass("ju-sliderbutton"), 'Verify the expansion worked at all');
+
+		var $children = $testElement.children();
+		strictEqual($children.filter('.ui-slider').length, 1, 'Verify the slider has been created');
+		strictEqual($children.filter('.ju-sliderbutton-text').length, 1, 'Verify the text has been created');
 		if (sliderbuttonVariant === 'mobile') {
-			strictEqual(children.length, 3, 'Verify the slider, the (hidden) input and the text have been created');
+			strictEqual($testElement.find('input.ju-sliderbutton-input').length, 1, 'Verify the input has been created');
 		}
-		else {
-			strictEqual(children.length, 2, 'Verify the slider and the text have been created');
-		}
-		ok(children.first().hasClass("ju-sliderbutton-text"), 'Verify the text has been created');
-		ok(children.last().hasClass("ui-slider"), 'Verify the slider has been created');
-		var handles = children.last().children(".ui-slider-handle");
+
+		var handles = $testElement.find(".ui-slider-handle");
 		strictEqual(handles.length, 1, 'Verify the slider contains one handle');
 		strictEqual(handles.first().position().left, 0, 'Verify the handle is in idle position');
 	});

@@ -120,3 +120,22 @@
 	-ms-transform: scale(-1, 1);
 	transform: scale(-1, 1);
 }
+
+.ju-sliderbutton .ui-slider .ui-input-text {
+	display: none;
+}
+
+
+.ju-sliderbutton .ui-slider .ui-slider-track {
+	-webkit-box-shadow:none;
+	-moz-box-shadow:none;
+	box-shadow:none;
+	top: 15px;
+	margin: 0;
+	background: none;
+	border: none;
+}
+
+.ju-sliderbutton.ju-sliderbutton-mini .ui-slider .ui-slider-track {
+	top: 9px;
+}

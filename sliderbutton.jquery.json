@@ -1,6 +1,6 @@
 {
 	"name": "sliderbutton",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"title": "jQuery Sliderbutton",
 	"author": {
 		"name": "Jochen Ulrich",
@@ -14,12 +14,12 @@
 		}
 	],
 	"dependencies": {
-		"jquery": "~1.7",
-		"ui.core": "~1.8",
-		"ui.widget": "~1.8",
-		"ui.css": "~1.8",
-		"ui.slider": "~1.8",
-		"mobile": "~1.0"
+		"jquery": ">=1.7.0 <3.0.0",
+		"ui.core": "<1.10",
+		"ui.widget": "<1.10",
+		"ui.css": "<1.10",
+		"ui.slider": "<1.10",
+		"mobile": "~1"
 	},
 	
 	

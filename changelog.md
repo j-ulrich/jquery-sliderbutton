@@ -1,6 +1,10 @@
 jQuery UI/Mobile Sliderbutton Changelog
 =======================================
 
+Version 2.0.2
+-------------
+* Fixes the mobile version for jQuery Mobile 1.3.x and above.
+
 Version 2.0.1 - (Released: 2013-04-25)
 -------------
 * Fixes the broken Version 2.0.0 by removing merge obstacles.
@@ -25,7 +29,7 @@ Version 1.3.2 - (Released: 2013-02-19)
 Version 1.3.1 - (Released: 2013-02-17)
 -------------
 **Note:** Version 1.3.1 contains breaking changes (change in the default values)
-and should have been a major update (i.e. 3.0.0).
+and should have been a major update (i.e. 2.0.0).
 
 * Changes default text to "activate".
 * Adds a legal note in the documentation.
