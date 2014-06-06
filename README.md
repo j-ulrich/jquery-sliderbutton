@@ -49,10 +49,10 @@ demonstration of most of the features of both versions of the sliderbutton plugi
 
 Live demos can be found at jsFiddle and JS Bin where you can also play around with the plugin:
 * UI:
-	- http://jsfiddle.net/Ignitor/SmZEr/embedded/result/ ([jsFiddle](http://jsfiddle.net/Ignitor/SmZEr/))
+	- http://jsfiddle.net/Ignitor/VY5FC/embedded/result/ ([jsFiddle](http://jsfiddle.net/Ignitor/VY5FC/))
 	- http://jsbin.com/eqasew/6/edit#live ([JS Bin](http://jsbin.com/eqasew/6/edit))
 * Mobile:
-	- http://jsfiddle.net/Ignitor/VY5FC/embedded/result/ ([jsFiddle](http://jsfiddle.net/Ignitor/VY5FC/))
+	- http://jsfiddle.net/Ignitor/SmZEr/embedded/result/ ([jsFiddle](http://jsfiddle.net/Ignitor/SmZEr/))
 	- http://jsbin.com/igovef/10/edit#live ([JS Bin](http://jsbin.com/igovef/10/edit))
 
 Options
@@ -138,7 +138,7 @@ does not change.
 
 Licensing
 ---------
-Copyright &copy; 2013 Jochen Ulrich
+Copyright &copy; 2014 Jochen Ulrich
 http://github.com/j-ulrich/jquery-sliderbutton
 
 Licensed under the [MIT license](http://opensource.org/licenses/MIT).
