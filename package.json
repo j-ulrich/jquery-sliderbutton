@@ -1,6 +1,6 @@
 {
 	"name": "jquery-sliderbutton",
-	"description": 'jQuery UI/Mobile plugin providing a slider-based button ("slide to activate")',
+	"description": "jQuery UI/Mobile plugin providing a slider-based button (\"slide to activate\")",
 	"version": "2.0.2",
 	"keywords": ["slide", "slider", "ui", "mobile", "button"],
 	"author": {
@@ -9,7 +9,8 @@
 		"url": "https://github.com/j-ulrich"
 	},
 	"contributors": [
-		"Jimmi Agerskov <agerskovj@gmail.com>"
+		"Jimmi Agerskov <agerskovj@gmail.com>",
+		"Moses Holmström <thykka+nospam@gmail.com>"
 	],
 	"bugs": "https://github.com/j-ulrich/jquery-sliderbutton/issues",
 	"licenses": [
@@ -25,9 +26,6 @@
 	"dependencies": {
 		"jquery": ">=1.7.0 <3.0.0"
 	},
-
-	
-	
 	"homepage": "https://github.com/j-ulrich/jquery-sliderbutton",
 	"scripts": {
 		"test": "grunt qunit"
