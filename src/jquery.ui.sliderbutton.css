@@ -57,6 +57,7 @@
 	margin-top: -50px;
 	margin-left: 35px;
 	margin-right: 35px;
+	position: relative;
 }
 
 .ju-sliderbutton .ju-sliderbutton-slider .ui-slider-handle {
@@ -73,6 +74,7 @@
 	top: 0px;
 	width: 70px;
 	margin-left: -35px;
+	position: absolute;
 }
 
 .ju-sliderbutton-left .ui-slider-handle {
